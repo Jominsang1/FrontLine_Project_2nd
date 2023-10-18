@@ -16,6 +16,8 @@
     <script src="resources/js/header.js"></script>
     <!-- 헤더 스타일 -->
     <link rel="stylesheet" href="resources/css/header.css">
+    <!-- 푸터 스타일 -->
+    <link rel="stylesheet" href="resources/css/footer.css">
     <!-- 글꼴 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -773,111 +775,7 @@
         }
     </style>
 
-    <style>
-        
-        /* 푸터 */
-        footer {
-            font-family: 'Noto Sans KR', sans-serif;
-            /* font-family: 'Roboto', sans-serif; */
-            font-weight: 400;
-            color: #FFFFFF;
-            font-size: 25px;
-            line-height: 34.05px;
-
-            position : relative;
-            
-            top : 100%;
-
-            /* border: 1px solid red; */
-            width: 100%;
-            height: 245px;
-            background-color: #474747;
-            
-            
-            
-        }
-
-        footer .footer_div {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            /* border: solid 1px red; */
-        }
-
-        footer .textdiv {
-            display: inline-block;
-            padding-top: 30px;
-            /* padding-left: 30px; */
-            margin-left: 40px;
-        }
-
-        footer .icondiv {
-            /* display: flex;
-            justify-content: flex-end;
-            display: inline-block; */
-            padding-top: 30px;
-            margin-right: 40px;
-        }
-
-        footer #logo {
-            /* position: relative; */
-            /* top: 61px;
-            left: 50px; */
-        }
-
-        footer .number {
-            font-size: 35px;
-            font-weight: 600;
-            text-align: right;
-            /* margin-right: 34px; */
-            margin-right: 25px;
-            /* margin-bottom:30px; */
-            margin-top: -35px;
-        }
-
-        footer .rightText {
-            text-align: right;
-            font-weight: 600;
-            /* margin-right: 34px; */
-            /* vertical-align: top; */
-            margin-right: 25px;
-            margin-bottom:20px;
-            margin-top: -30px;
-        }
-
-        footer .footer_top {
-            /* border: 1px solid red; */
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid white;
-            /* border-bottom: 1px solid white; */
-        
-        }
-
-        footer .footer_bottom {
-            /* height: 500px; */
-            /* border: 1px solid red; */
-            padding: 0px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        footer .text_footer {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        footer .logo_footer{
-            margin-left: 40px;
-            margin-top: -15px;
-        }
-        
-        footer a {
-            color: #fff; text-decoration: none; outline: none
-        }
-    </style>
+    
     
     <style>
         /* 미디어 */
@@ -888,8 +786,6 @@
 </head>
 <body>
     <jsp:include page="header.jsp"/>
-    <!-- <a href="./login.html"><input type="button" value="대충 로그인페이지 가는 버튼"></a>
-    <a href="./main_2.html"><input type="button" value="대충 main_2페이지 가는 버튼"></a> -->
     <div class="main_wrap">
         <div class="main">
             <div class="main_map">
@@ -928,43 +824,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="footer_div footer_wrap">
-            <div class="footer_div footer_top">
-                <div class="footer_div textdiv">
-                    <span><a href="./terms.html">이용약관</a>&nbsp;</span>|
-                    <span><a href="./terms.html">개인정보처리방침</a>&nbsp;</span>|
-                    <span><a href="./serviceCenter.html">고객센터</a></span>
-                </div>
-                <div class="footer_div icondiv">
-                    <span><a href="https://www.facebook.com/?locale=ko_KR"><img
-                        src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/Facebook.png?raw=true"></a>&nbsp;&nbsp;</span>
-                    
-                        <span><a href="https://www.youtube.com/"><img
-                            src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/YouTube.png?raw=true"></a>&nbsp;&nbsp;</span>
-                    
-                    
-                        <span><a href="https://www.instagram.com/"><img
-                            src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/Instagram.png?raw=true"></a></span>
-                    
-                </div>
-            </div>
-            <div class="footer_div line2"></div>
-           
-    
-            <div class="footer_div footer_bottom">
-                <div class="footer_div logo_footer">
-                    <a href="./main.html"><img id="logo" src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/%EB%86%80%EC%95%84%EC%9C%A0_white.png?raw=true"></a>
-                </div>
-                
-                <div class="footer_div text_footer">
-                    <div class="footer_div rightText">고객센터</div>
-                    <div class="footer_div number">1313-1212</div>
-                </div>
-                    
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -10,6 +10,21 @@ public class UserBean {
 	private String userRegDate;
 	private String userGrade;
 	
+	public UserBean() {
+		
+	}
+	
+	public UserBean(String userName, String userId, String userPw, String userEmail, String userPhone, String userBirth, String userRegDate, String userGrade) {
+		this.userName = userName;
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userBirth = userBirth;
+		this.userRegDate = userRegDate;
+		this.userGrade = userGrade;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

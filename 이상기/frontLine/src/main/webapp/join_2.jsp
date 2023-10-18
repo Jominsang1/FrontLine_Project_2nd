@@ -10,14 +10,24 @@
     <script src="resources/js/header.js"></script>
     <!-- 헤더 스타일 -->
     <link rel="stylesheet" href="resources/css/header.css">
-    
+    <!-- 푸터 스타일 -->
+    <link rel="stylesheet" href="resources/css/footer.css">
     <script>
         window.addEventListener("load", function(){
             eye()
             check_password()
             button()
             check_all()
+            submit_block()
         })
+        
+        function submit_block(){
+        	document.querySelector(".main_form").addEventListener("keydown", function(event){
+        		if(event.keyCode == 13){
+        			event.preventDefault();
+        		}	
+        	})
+        }
 
         function eye(){
             let eye = document.querySelectorAll(".eye")
@@ -58,7 +68,7 @@
             let count = 0;
             button.addEventListener("click", function(){
                 if(count == 0){
-                    location.href="./join_finish.html"
+                    location.href="frontLine/Join"
                 }
             })
         }
@@ -299,7 +309,7 @@
     <div class="wrap">
         <h1>회원가입 및 이용약관</h1>
         <div class="input_main">
-        	<form method="post" action="/frontLine/Join">
+        	<form class="main_form" method="post" action="/frontLine/Join">
             	<div class="input_top">
                 	<div class="section input_name"><img src="resources/images/icon_human.png"><input type="text" placeholder="이름" name="userName"></div>
                 	<div class="section top input_id"><img src="resources/images/icon_check.png"><input type="text" placeholder="아이디" name="userId"></div>
@@ -317,43 +327,6 @@
             </form>
         </div>
     </div>
-
-    <footer>
-        <div class="footer_div footer_wrap">
-            <div class="footer_div footer_top">
-                <div class="footer_div textdiv">
-                    <span><a href="./terms.html">이용약관</a>&nbsp;</span>|
-                    <span><a href="./terms.html">개인정보처리방침</a>&nbsp;</span>|
-                    <span><a href="./serviceCenter.html">고객센터</a></span>
-                </div>
-                <div class="footer_div icondiv">
-                    <span><a href="https://www.facebook.com/?locale=ko_KR"><img
-                        src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/Facebook.png?raw=true"></a>&nbsp;&nbsp;</span>
-                    
-                        <span><a href="https://www.youtube.com/"><img
-                            src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/YouTube.png?raw=true"></a>&nbsp;&nbsp;</span>
-                    
-                    
-                        <span><a href="https://www.instagram.com/"><img
-                            src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/Instagram.png?raw=true"></a></span>
-                    
-                </div>
-            </div>
-            <div class="footer_div line2"></div>
-           
-    
-            <div class="footer_div footer_bottom">
-                <div class="footer_div logo_footer">
-                    <a href="./main.html"><img id="logo" src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/%EB%86%80%EC%95%84%EC%9C%A0_white.png?raw=true"></a>
-                </div>
-                
-                <div class="footer_div text_footer">
-                    <div class="footer_div rightText">고객센터</div>
-                    <div class="footer_div number">1313-1212</div>
-                </div>
-                    
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </body>
 </html>

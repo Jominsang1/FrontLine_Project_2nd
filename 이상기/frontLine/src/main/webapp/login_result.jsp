@@ -4,18 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>로그인 결과</h1>
 	<%	
-		UserBean ub = (UserBean)session.getAttribute("ub");
-		out.println("ub.getUserId() : " + ub.getUserId());
-		%>
-		<br>
-		<%
-		out.println("ub.getUserPw() : " + ub.getUserPw());
+	if(session.getAttribute("userBean") != null){
+		UserBean ub = (UserBean)session.getAttribute("userBean");
+		out.println(ub.toString());
+	} else {
+		out.println("정보가 없습니다.");
+	}
+		
 	%>
 </body>
 </html>

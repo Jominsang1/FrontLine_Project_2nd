@@ -32,33 +32,56 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
 		
-		System.out.println("아이디 : " + request.getParameter("userId"));
-		System.out.println("비밀번호 : " + request.getParameter("userPw"));
+		System.out.println("로그인 시도 아이디 : " + request.getParameter("userId"));
+		System.out.println("로그인 시도 비밀번호 : " + request.getParameter("userPw"));
 		
 		HttpSession session = request.getSession();
 		
-		UserBean ub = new UserBean();
-		UserDb ud = new UserDb();
+		UserDb userData = new UserDb();
 		
-		
-		ub.setUserId(request.getParameter("userId"));
-		ub.setUserPw(request.getParameter("userPw"));
-		
-		System.out.println("ub.getUserId() : " + ub.getUserId());
-		System.out.println("ub.getUserPw() : " + ub.getUserPw());
-		
-		session.setAttribute("ub", ub);
-		
-		int count = 0;
-		
-		for(int i = 0; i<ud.getUserId().size(); i++) {
-			System.out.println(ud.getUserId().get(i));
+		if(session.getAttribute("userData") != null) {
+			userData = (UserDb)session.getAttribute("userData");
 		}
 		
-		session.setAttribute("logon", true);
+		UserBean userBean = new UserBean();
 		
-		response.sendRedirect("login_result.jsp");
+		userBean.setUserId(request.getParameter("userId"));
+		userBean.setUserPw(request.getParameter("userPw"));
+		
+		int target = -1;
+		int count = -1;
+		
+		for(int i = 0; i<userData.getUserData().size(); i++) {
+			if(userData.getUserData().get(i).getUserId().equals(userBean.getUserId())) {
+				if(userData.getUserData().get(i).getUserPw().equals(userBean.getUserPw())){
+					count = 1;
+					target = i;
+					userBean = userData.getUserData().get(i);
+				}
+			}
+		}
+		
+		if(count == 1) {
+			userBean = userData.getUserData().get(target);
+			
+			session.setAttribute("userBean", userBean);
+			
+			session.setAttribute("userData", userData);
+			
+			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 성공");
+			response.getWriter().println("<script>alert('로그인 되었습니다.'); location.href='main.jsp';</script>");
+			
+		} else {
+			
+			session.setAttribute("userData", userData);
+			
+			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 실패");
+			response.getWriter().println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); location.href='login.jsp';</script>");
+		}
 	}
 
 	/**

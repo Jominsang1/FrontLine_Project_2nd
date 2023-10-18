@@ -1,6 +1,9 @@
 package com.frontline.user;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.frontline.javabeans.UserBean;
+import com.frontline.db.UserDb;
 
 /**
  * Servlet implementation class Join
@@ -33,6 +37,8 @@ public class Join extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		
 		// 콘솔 출력
 		System.out.println("이름 : " + request.getParameter("userName"));
 		System.out.println("아이디 : " + request.getParameter("userId"));
@@ -44,18 +50,38 @@ public class Join extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// UserBean 필드 값에 입력
-		UserBean ub = new UserBean();
+		UserBean userBean = new UserBean();
 		
-		ub.setUserName(request.getParameter("userName"));
-		ub.setUserId(request.getParameter("userId"));
-		ub.setUserPw(request.getParameter("userPw"));
-		ub.setUserEmail(request.getParameter("userEmail"));
-		ub.setUserPhone(request.getParameter("userPhone"));
-		ub.setUserBirth(request.getParameter("userBirth"));
+		userBean.setUserName(request.getParameter("userName"));
+		userBean.setUserId(request.getParameter("userId"));
+		userBean.setUserPw(request.getParameter("userPw"));
+		userBean.setUserEmail(request.getParameter("userEmail"));
+		userBean.setUserPhone(request.getParameter("userPhone"));
+		userBean.setUserBirth(request.getParameter("userBirth"));
+		userBean.setUserRegDate(LocalDate.now().format(DateTimeFormatter.ofPattern("YYYYMMdd")));
+		userBean.setUserGrade("user");
 		
-		session.setAttribute("ub", ub);
 		
-		response.sendRedirect("join_result.jsp");
+		UserDb userData = new UserDb();
+		
+		for(int i = 0; i<userData.getUserData().size(); i++) {
+			userData.getUserData().get(i).toString();
+		}
+		
+		if(session.getAttribute("userData") == null) {
+			userData.getUserData().add(userBean);
+		} else {
+			userData = (UserDb)session.getAttribute("userData");
+			userData.getUserData().add(userBean);
+		}
+		
+		for(int i = 0; i<userData.getUserData().size(); i++) {
+			userData.getUserData().get(i).toString();
+		}
+		
+		session.setAttribute("userData", userData);
+		
+		response.getWriter().println("<script>alert('회원가입이 완료되었습니다.'); location.href='main.jsp';</script>");
 	}
 
 	/**

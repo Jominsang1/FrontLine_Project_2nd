@@ -1,30 +1,24 @@
 package com.frontline.db;
 
 import java.util.*;
+import com.frontline.javabeans.UserBean;
 
 public class UserDb {
-	private List<String> userId = new ArrayList<String>();
-	private List<String> userPw = new ArrayList<String>();
+	private List<UserBean> userData = new ArrayList<UserBean>();
 	
 	public UserDb(){
-		this.userId.add("frontline");
-		this.userPw.add("1234");
+		this.userData.add(new UserBean("관리자", "admin", "1234", "admin@admin.com", "01012345678", "19999999", "20231018", "admin"));
+		this.userData.add(new UserBean("이상기", "lsk", "1234", "lsk@frontline.com", "01012345678", "19961215", "20231018", "user"));
 	}
 
-	public List<String> getUserId() {
-		return userId;
+	public List<UserBean> getUserData() {
+		return userData;
 	}
 
-	public void setUserId(String userId) {
-		this.userId.add(userId);
+	public void setUserData(List<UserBean> userData) {
+		this.userData = userData;
 	}
-
-	public List<String> getUserPw() {
-		return userPw;
-	}
-
-	public void setUserPw(String userPw) {
-		this.userPw.add(userPw);
-	}
+	
+	
 	
 }
