@@ -38,6 +38,7 @@ public class Login extends HttpServlet {
 		
 		System.out.println("로그인 시도 아이디 : " + request.getParameter("userId"));
 		System.out.println("로그인 시도 비밀번호 : " + request.getParameter("userPw"));
+		System.out.println("---------------------------------------------------------");
 		
 		HttpSession session = request.getSession();
 		
@@ -73,6 +74,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("userData", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 성공");
+			System.out.println("---------------------------------------------------------");
 			response.getWriter().println("<script>alert('로그인 되었습니다.'); location.href='main.jsp';</script>");
 			
 		} else {
@@ -80,6 +82,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("userData", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 실패");
+			System.out.println("---------------------------------------------------------");
 			response.getWriter().println("<script>alert('아이디 또는 비밀번호가 틀렸습니다.'); location.href='login.jsp';</script>");
 		}
 	}

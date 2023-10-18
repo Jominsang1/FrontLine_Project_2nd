@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.javabeans.UserBean;
 import com.frontline.db.UserDb;
+import com.frontline.javabeans.UserBean;
 
 /**
- * Servlet implementation class Join
+ * Servlet implementation class Info
  */
-@WebServlet("/Join")
-public class Join extends HttpServlet {
+@WebServlet("/Info")
+public class Info extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Join() {
+    public Info() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +37,6 @@ public class Join extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		
@@ -46,39 +47,48 @@ public class Join extends HttpServlet {
 		System.out.println("이메일 : " + request.getParameter("userEmail"));
 		System.out.println("휴대폰 번호 : " + request.getParameter("userPhone"));
 		System.out.println("생년월일 : " + request.getParameter("userBirth"));
-		System.out.println("---------------------------------------------------------");
 		
 		HttpSession session = request.getSession();
 		
 		// UserBean 필드 값에 입력
-		UserBean userBean = new UserBean();
+		UserBean userBean = (UserBean)session.getAttribute("userBean");
+		UserDb userData = (UserDb)session.getAttribute("userData");
 		
-		userBean.setUserName(request.getParameter("userName"));
-		userBean.setUserId(request.getParameter("userId"));
-		userBean.setUserPw(request.getParameter("userPw"));
-		userBean.setUserEmail(request.getParameter("userEmail"));
-		userBean.setUserPhone(request.getParameter("userPhone"));
-		userBean.setUserBirth(request.getParameter("userBirth"));
-		userBean.setUserRegDate(LocalDate.now().format(DateTimeFormatter.ofPattern("YYYYMMdd")));
-		userBean.setUserGrade("user");
+		Enumeration params = request.getParameterNames();
 		
-		
-		UserDb userData = new UserDb();
+		while (params.hasMoreElements()){
+		    String name = (String)params.nextElement();
+		    
+		    switch(name) {
+		    	case "userName":
+		    		userBean.setUserName(request.getParameter(name));
+		    		break;
+		    	case "userPw":
+		    		userBean.setUserPw(request.getParameter(name));
+		    		break;
+		    	case "userEmail":
+		    		userBean.setUserEmail(request.getParameter(name));
+		    		break;
+		    	case "userPhone":
+		    		userBean.setUserPhone(request.getParameter(name));
+		    		break;
+		    }
+		    
+		    System.out.println("수정된 필드값 : " + name + " : " +request.getParameter(name));
+		    System.out.println("---------------------------------------------------------");
+		}
 		
 		for(int i = 0; i<userData.getUserData().size(); i++) {
-			userData.getUserData().get(i).toString();
+			if(userData.getUserData().get(i).getUserId().equals(userBean.getUserId())) {
+				userData.getUserData().set(i, userBean);
+			}
 		}
 		
-		if(session.getAttribute("userData") == null) {
-			userData.getUserData().add(userBean);
-		} else {
-			userData = (UserDb)session.getAttribute("userData");
-			userData.getUserData().add(userBean);
-		}
+		session.setAttribute("userBean", userBean);
 		
 		session.setAttribute("userData", userData);
 		
-		response.getWriter().println("<script>alert('회원가입이 완료되었습니다.'); location.href='main.jsp';</script>");
+		response.getWriter().println("<script>alert('정보가 수정되었습니다.'); location.href='info.jsp';</script>");
 	}
 
 	/**

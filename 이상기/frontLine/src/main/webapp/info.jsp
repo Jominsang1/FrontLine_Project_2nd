@@ -39,7 +39,8 @@
             // let pw = document.getElementById("비밀번호")
             // let email = document.getElementById("이메일주소")
             // let phoneNum = document.getElementById("전화번호")
-
+	
+            let form = document.querySelector(".form")
             for (let i = 0; i < adjust.length; i++) {
                 
                 adjust[i].addEventListener("click", function () {
@@ -61,29 +62,44 @@
                             // t1.setAttribute("disabled")
                             t1.innerHTML = "<c:out value='${sessionScope.userBean.userName}'/>"
                             t2.setAttribute("placeholder", "새 이름")
+                            t2.setAttribute("name", "userName")
+                            form.setAttribute("action", "/frontLine/Info")
                             t3.style.display="none";
                             // t3.setAttribute("placeholder", "새 이름 확인")
                         } else if(i == 1){
                             title_h2.innerHTML= "비밀번호 변경"
                             t1.innerHTML = ""
                             t2.setAttribute("placeholder", "새 비밀번호")
+                            t2.setAttribute("type", "password")
                             t3.setAttribute("placeholder", "새 비밀번호 확인")
+                            t3.setAttribute("name", "userPw")
+                            t3.setAttribute("type", "password")
+                            form.setAttribute("action", "/frontLine/Info")
+                            t3.style.display="block";
                         } else if( i == 2){
                             title_h2.innerHTML= "이메일주소 변경"
                             t1.innerHTML = "<c:out value='${sessionScope.userBean.userEmail}'/>"
                             t2.setAttribute("placeholder", "새 이메일주소")
                             t3.setAttribute("placeholder", "새 이메일주소 확인")
+                            t3.setAttribute("name", "userEmail")
+                            form.setAttribute("action", "/frontLine/Info")
+                            t3.style.display="block";
                         } else if(i == 3){
                             title_h2.innerHTML= "휴대폰번호 변경"
                             t1.innerHTML = "<c:out value='${sessionScope.userBean.userPhone}'/>"
                             t2.setAttribute("placeholder", "새 휴대폰번호")
                             t3.setAttribute("placeholder", "새 휴대폰번호 확인")
+                            t3.setAttribute("name", "userPhone")
+                            form.setAttribute("action", "/frontLine/Info")
+                            t3.style.display="block";
                         }
 
                         cancel.addEventListener("click", function () {
                             background.style.display = "none";
                         })
-                        apply.addEventListener("click", function () {
+                        
+                        
+                        <%-- apply.addEventListener("click", function () {
                             if(i == 0){
 
                                 background.style.display = "none";
@@ -91,7 +107,7 @@
                                 console.log(tbox1)
                                 console.log(1)
                             }
-                        })
+                        }) --%>
                         xBox.addEventListener("click", function () {
                             background.style.display = "none";
                         })
@@ -390,15 +406,17 @@
                         <div class="popUp-Line">
                             <hr>
                         </div>
-                        <div>
-                            <div><div class="popUp-text t1"></div></div>
-                            <div><input class="popUp-text t2" type="text" placeholder="" value=""></div>
-                            <div><input class="popUp-text t3" type="text" placeholder="" value=""></div>
-                        </div>
-                        <div class="popUp-set">
-                            <div class="popUp cancel">취소</div>
-                            <div class="popUp apply">적용</div>
-                        </div>
+                        <form class="form">
+                        	<div>
+                            	<div><div class="popUp-text t1"></div></div>
+                            	<div><input class="popUp-text t2" type="text"></div>
+                            	<div><input class="popUp-text t3" type="text"></div>
+                        	</div>
+                       		<div class="popUp-set">
+                            	<div class="popUp cancel">취소</div>
+                            	<input class="popUp apply" type="submit" value="적용">
+                        	</div>
+                        </form>
                     </div>
                 </div>
                 <div>
@@ -450,7 +468,7 @@
                     <div class="textbox bottom">
                         <img style="position:relative; top: 6px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_gift.png?raw=true">
-                        <div class="tbox tname">생년월일 9자리</div>
+                        <div class="tbox tname">생년월일 8자리</div>
                         <div class="tbox ">${sessionScope.userBean.userBirth}</div>
                     </div>
                 </div>
