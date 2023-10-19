@@ -52,7 +52,7 @@
 
             for(let i = 0; i<password.length; i++){
                 // console.log("1")
-                password[i].addEventListener("blur", function(){
+                password[i].addEventListener("keyup", function(){
                     // console.log(password[i].value)
                     if(password[0].value == password[1].value){
                         document.querySelector(".check_password").style.display = "none"
@@ -79,7 +79,7 @@
             let password = document.querySelectorAll(".input_password input")
 
             for(let i = 0; i<input_all.length; i++){
-                input_all[i].addEventListener("blur", function(){
+                input_all[i].addEventListener("keyup", function(){
                     for(let j = 0; j<input_all.length; j++){
                         if (input_all[j].value !== ""){
                             count += 1;

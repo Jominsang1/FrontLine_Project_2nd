@@ -18,7 +18,4 @@ public class UserDb {
 	public void setUserData(List<UserBean> userData) {
 		this.userData = userData;
 	}
-	
-	
-	
 }

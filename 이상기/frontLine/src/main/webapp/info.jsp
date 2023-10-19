@@ -8,12 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- 헤더 자바스크립트 -->
-    <script src="resources/js/header.js"></script>
+    <!-- 인포 헤더만 자바스크립트로 헤더 스타일 변경해줌 -->
+    <script src="resources/js/header_info.js"></script>
     <!-- 헤더 스타일 -->
     <link rel="stylesheet" href="resources/css/header.css">
     <script>
         window.addEventListener("load", function () {
             bind()
+            
+            submit_block();
+            double_check();
         })
 
         function bind() {
@@ -71,6 +75,7 @@
                             t1.innerHTML = ""
                             t2.setAttribute("placeholder", "새 비밀번호")
                             t2.setAttribute("type", "password")
+                            t2.removeAttribute("name");
                             t3.setAttribute("placeholder", "새 비밀번호 확인")
                             t3.setAttribute("name", "userPw")
                             t3.setAttribute("type", "password")
@@ -80,6 +85,7 @@
                             title_h2.innerHTML= "이메일주소 변경"
                             t1.innerHTML = "<c:out value='${sessionScope.userBean.userEmail}'/>"
                             t2.setAttribute("placeholder", "새 이메일주소")
+                            t2.removeAttribute("name");
                             t3.setAttribute("placeholder", "새 이메일주소 확인")
                             t3.setAttribute("name", "userEmail")
                             form.setAttribute("action", "/frontLine/Info")
@@ -88,6 +94,7 @@
                             title_h2.innerHTML= "휴대폰번호 변경"
                             t1.innerHTML = "<c:out value='${sessionScope.userBean.userPhone}'/>"
                             t2.setAttribute("placeholder", "새 휴대폰번호")
+                            t2.removeAttribute("name");
                             t3.setAttribute("placeholder", "새 휴대폰번호 확인")
                             t3.setAttribute("name", "userPhone")
                             form.setAttribute("action", "/frontLine/Info")
@@ -96,6 +103,8 @@
 
                         cancel.addEventListener("click", function () {
                             background.style.display = "none";
+                            t2.value=null;
+                            t3.value=null;
                         })
                         
                         
@@ -110,6 +119,8 @@
                         }) --%>
                         xBox.addEventListener("click", function () {
                             background.style.display = "none";
+                            t2.value=null;
+                            t3.value=null;
                         })
                         // t2.addEventListener("input",function() {
                         //      t2 = t2.value;
@@ -122,6 +133,47 @@
                 
                 
             }
+        
+        function double_check(){
+        	let input_1 = document.querySelector(".t2");
+        	let input_2 = document.querySelector(".t3");
+        	
+        	let title_h2 = document.querySelector(".title_h2")
+        	
+        	let submit = document.querySelector(".apply");
+        	
+        	let double_check = document.querySelector(".double_check");
+        	
+        	input_1.addEventListener("keyup", function(){
+        		if(input_1.value != input_2.value && title_h2.textContent != "이름 변경"){
+        			console.log(title_h2.textContent);
+        			submit.setAttribute("type", "none");
+        			double_check.style.display="block";
+        		} else {
+        			submit.setAttribute("type", "submit");
+        			double_check.style.display="none";
+        		}
+        	})
+        	
+        	input_2.addEventListener("keyup", function(){
+        		if(input_1.value != input_2.value && title_h2.textContent != "이름 변경"){
+        			submit.setAttribute("type", "none");
+        			double_check.style.display="block";
+        		} else {
+        			submit.setAttribute("type", "submit");
+        			double_check.style.display="none";
+        		}
+        	})
+        	
+        }
+        
+        function submit_block(){
+        	document.querySelector(".form").addEventListener("keydown", function(event){
+        		if(event.keyCode == 13){
+        			event.preventDefault();
+        		}	
+        	})
+        }
     </script>
     <style>
         body {
@@ -377,6 +429,11 @@
         .popUp-title {
             margin: 10px;
         }
+        
+        .double_check {
+        	display: none;
+        	color: red;
+        }
     </style>
 </head>
 
@@ -411,6 +468,7 @@
                             	<div><div class="popUp-text t1"></div></div>
                             	<div><input class="popUp-text t2" type="text"></div>
                             	<div><input class="popUp-text t3" type="text"></div>
+                            	<div class="double_check">정보가 일치하지 않습니다.</div>
                         	</div>
                        		<div class="popUp-set">
                             	<div class="popUp cancel">취소</div>
