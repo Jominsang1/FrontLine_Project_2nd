@@ -31,10 +31,20 @@
 						} else {
 							%>
 							<li>${sessionScope.userBean.userName}님 환영합니다.</li>
-							<li class="menu_logout"><a href="/frontLine/Logout">로그아웃</a></li>
-							<li class="menu_my"><a href="info.jsp">내 정보</a></li>
-							<li class="menu_reser"><a href="my-예약내역.html">예약내역</a></li>
-							<%
+							<% 
+							if("user".equals(((UserBean)session.getAttribute("userBean")).getUserGrade())){
+								%>
+								<li class="menu_logout"><a href="/frontLine/Logout">로그아웃</a></li>
+								<li class="menu_my"><a href="info.jsp">내 정보</a></li>
+								<li class="menu_reser"><a href="my-예약내역.html">예약내역</a></li>
+								<%	
+							} else if("admin".equals(((UserBean)session.getAttribute("userBean")).getUserGrade())){
+								%>
+								<li class="menu_logout"><a href="/frontLine/Logout">로그아웃</a></li>
+								<li class="menu_my"><a href="info.jsp">내 정보</a></li>
+								<li class="menu_admin"><a href="admin.jsp">관리자 페이지</a></li>
+								<%	
+							}
 						}
 						%>
 					</ul>

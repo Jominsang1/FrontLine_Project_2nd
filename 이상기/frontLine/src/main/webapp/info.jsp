@@ -59,6 +59,8 @@
                         // t1.innerHTML = tbox1;
                         
                         // }
+                    <%-- i==0 : 이름 / i==1 : 비밀번호 / i==2 : 이메일 / i==3 : 휴대폰번호 --%>
+                    <%-- 이름변경 팝업엔 t3(두번째인풋) 없음 나머지 팝업에선 t2가 첫번째인풋 t3가 두번째인풋 --%>
                         if(i == 0) {
                             title_h2.innerHTML= "이름 변경"
                             // t1.innerHTML = tbox1.innerHTML
@@ -100,7 +102,8 @@
                             form.setAttribute("action", "/frontLine/Info")
                             t3.style.display="block";
                         }
-
+						<%------------------------------------------------------%>
+						
                         cancel.addEventListener("click", function () {
                             background.style.display = "none";
                             t2.value=null;
@@ -463,6 +466,7 @@
                         <div class="popUp-Line">
                             <hr>
                         </div>
+                        <%------- 팝업 입력값 들어가는 부분 -------%>
                         <form class="form">
                         	<div>
                             	<div><div class="popUp-text t1"></div></div>
@@ -475,6 +479,7 @@
                             	<input class="popUp apply" type="submit" value="적용">
                         	</div>
                         </form>
+                        <%------------------------------------%>
                     </div>
                 </div>
                 <div>
