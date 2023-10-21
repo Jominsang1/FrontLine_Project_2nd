@@ -21,6 +21,7 @@
 		// 수정버튼
 		$("input[value=수정]").click(function(){
 			
+			let target = Number($(this).attr("id"))
 			let target_num = Number($(this).attr("id"))+1;
 			
 			let name = $("tr").eq(target_num).children("td").eq(0).text()
@@ -41,6 +42,8 @@
 			$("#popup_reser").text(reser)
 			$("#popup_grade").text(grade)
 			
+			$("input[name=userTarget]").val(target)
+			
 			$(".popup").css("display", "block")
 			
 		})
@@ -57,7 +60,6 @@
 <style>
 	body {
 		height: 100vh;
-		background-color: red;
 	}
 	nav{
 		height: 100%;
@@ -71,12 +73,25 @@
 	section {
 		background-color: white;
 		width: 100%;
+		
+		padding-top: 5%;
+	}
+	.section_title {
+		text-align: center;
+	}
+	.section_table {
+		text-align: center;
+		
+		display: flex;
+		justify-content: center;
+		
+		margin-top: 5%;
 	}
 	.mid_wrap {
 		display: flex;
 		height: 90%;
 	}
-	.menu {
+	.admin_menu {
 		text-align: center;
 		color: white;
 	}
@@ -84,15 +99,29 @@
 		display: none;
 		
 		position: absolute;
-		top: 10%;
-		left: 25%;
+		top: 20%;
+		left: 20%;
 		
-		border: 2px solid red;
+		border: 2px solid rgb(71, 71, 71);
 		background-color: white;
 		
 		width: 50%;
 		height: 50%;
 		
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	.popup_form_title {
+		display: flex;
+		
+		text-align: center;
+	}
+	.popup_form_bottom {
+		display: flex;
+		justify-content: center
+	}
+	.userTarget {
+		display: none;
 	}
 </style>
 </head>
@@ -100,51 +129,61 @@
 	<jsp:include page="header.jsp"/>
 	<div class="mid_wrap">
 		<nav>
-			<div class="menu menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
-			<div class="menu menu_wrtie"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
-			<div class="menu menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
+			<div class="admin_menu menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
+			<div class="admin_menu menu_wrtie"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
+			<div class="admin_menu menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
 		</nav>
 	
 		<section>
-			<h1>회원관리 페이지입니다.</h1>
-			<table border="1">
-				<tr>
-					<th>이름</th>
-					<th>아이디</th>
-					<th>비밀번호</th>
-					<th>이메일</th>
-					<th>핸드폰 번호</th>
-					<th>생일</th>
-					<th>회원가입일</th>
-					<th>등급</th>
-					<th>비고</th>
-				</tr>
-			<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
-				<tr>
-					<td>${item.userName}</td>
-					<td>${item.userId}</td>
-					<td>${item.userPw}</td>
-					<td>${item.userEmail}</td>
-					<td>${item.userPhone}</td>
-					<td>${item.userBirth}</td>
-					<td>${item.userRegDate}</td>
-					<td>${item.userGrade}</td>
-					<td><input type="button" value="수정" id="${i.index}"></td>
-				</tr>
-			</c:forEach>
-			</table>
+			<div class="section_title">
+				<h1>회원관리 페이지입니다.</h1>
+			</div>
+			
+			<div class="section_table">
+				<table border="1">
+					<tr>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>이메일</th>
+						<th>핸드폰 번호</th>
+						<th>생일</th>
+						<th>회원가입일</th>
+						<th>등급</th>
+						<th>비고</th>
+					</tr>
+				<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
+					<tr>
+						<td>${item.userName}</td>
+						<td>${item.userId}</td>
+						<td>${item.userPw}</td>
+						<td>${item.userEmail}</td>
+						<td>${item.userPhone}</td>
+						<td>${item.userBirth}</td>
+						<td>${item.userRegDate}</td>
+						<td>${item.userGrade}</td>
+						<td><input type="button" value="수정" id="${i.index}"></td>
+					</tr>
+				</c:forEach>
+				</table>
+			</div>
+			
+			
 			<div class="popup">
 				<form id="popup_form" action="/frontLine/UserEdit">
-				<div><h1>수정페이지</h1></div>
-					<div>이름 : <a id="popup_name"></a><br>수정할 값 : <input type="text" name="userName"></div>
-					<div>비밀번호 : <a id="popup_pw"></a><br>수정할 값 : <input type="text" name="userPw"></div>
-					<div>이메일 : <a id="popup_email"></a><br>수정할 값 : <input type="text" name="userEmail"></div>
-					<div>핸드폰 번호 : <a id="popup_phone"></a><br>수정할 값 : <input type="text" name="userPhone"></div>
-					<div>생일 : <a id="popup_birth"></a><br>수정할 값 : <input type="text" name="userBirth"></div>
-					<div>회원가입일 : <a id="popup_reser"></a><br>수정할 값 : <input type="text" name="userRegDate"></div>
-					<div>등급 : <a id="popup_grade"></a><br>수정할 값 : <input type="text" name="userGrade"></div>
-					<input type="submit" value="수정하기">
-					<input type="button" value="취소">
+				<div class="popup_form_title"><h1>수정페이지</h1></div>
+					<div>이름 : <a id="popup_name"></a><br><input type="text" name="userName"></div>
+					<div>비밀번호 : <a id="popup_pw"></a><br><input type="text" name="userPw"></div>
+					<div>이메일 : <a id="popup_email"></a><br><input type="text" name="userEmail"></div>
+					<div>핸드폰 번호 : <a id="popup_phone"></a><br><input type="text" name="userPhone"></div>
+					<div>생일 : <a id="popup_birth"></a><br><input type="text" name="userBirth"></div>
+					<div>회원가입일 : <a id="popup_reser"></a><br><input type="text" name="userRegDate"></div>
+					<div>등급 : <a id="popup_grade"></a><br><input type="text" name="userGrade"></div>
+					<input class="userTarget" type="text" name="userTarget">
+					<div class="popup_form_bottom">
+						<input type="submit" value="수정하기">
+						<input type="button" value="취소">
+					</div>
 				</form>
 			</div>
 		</section>

@@ -10,7 +10,7 @@
 			<ul class = "input_wrap">
 				<li ><input class="input" type="text" placeholder="어디로 갈까U?"></li>
 					<ul class="input_list">
-                    	<a href="./아산_천안_페이지/cheonAn_main.html"><li class="header_ch">천안</li></a>
+                    	<a href="ch_main.jsp"><li class="header_ch">천안</li></a>
                     	<a href="./아산_천안_페이지/asan_main.html"><li class="header_as">아산</li></a>
                     	<li class="header_tsd">태안, 서산, 당진</li>
                     	<li class="header_yhc">예산, 홍성, 청양</li>
