@@ -887,46 +887,50 @@
    		int popup2_count = 0;
    		
    		Cookie[] cookies = request.getCookies();
-   		for(Cookie c : cookies){
-   			if(c.getName().equals("popup1") && c.getValue().equals("no")){
-   				popup1_count = 1;
-   			}
-   			if(c.getName().equals("popup2") && c.getValue().equals("no")){
-   				popup2_count = 1;
-   			}
+   		
+   		if(cookies != null){
+   			for(Cookie c : cookies){
+   	   			if(c.getName().equals("popup1") && c.getValue().equals("no")){
+   	   				popup1_count = 1;
+   	   			}
+   	   			if(c.getName().equals("popup2") && c.getValue().equals("no")){
+   	   				popup2_count = 1;
+   	   			}
+   	   		}
+   	   		
+   	   		if(popup1_count == 0){
+   	   			%>
+   	   			<div class="popup_1">
+   	    			<img width="100%" heigth="100%" src="resources/images/popup_image_1.jpg">
+   	    			<form class="popup_1_form" action="/frontLine/Popup">
+   	    				<div class="popup_1_main">
+   	    					<div>
+   	    						<input class="popup_1_checkbox" type="checkbox" name="popup1"> 10초동안 보지않기
+   	    					</div> 
+   	    					<input class="popup_submit_1" type="submit" value="닫기">
+   	    				</div>
+   	    			</form>
+   	    		</div>
+   	   			<%
+   	   		}
+   	   		
+   	   		if(popup2_count == 0){
+   	   			%>
+   	   			<div class="popup_2">
+   	   	    		<img width="100%" heigth="100%" src="resources/images/popup_image_2.jpg">
+   	   	    		<form class="popup_2_form" action="/frontLine/Popup">
+   	   	    			<div class="popup_2_main">
+   	   	    				<div>
+   	   	    					<input class="popup_2_checkbox" type="checkbox" name="popup2"> 10초동안 보지않기
+   	   	    				</div> 
+   	   	    				<input class="popup_submit_2" type="submit" value="닫기">
+   	   	    			</div>
+   	   	    		</form>
+   	   	    	</div>
+   	   	    	<%
+   	   		}
    		}
    		
-   		if(popup1_count == 0){
-   			%>
-   			<div class="popup_1">
-    			<img width="100%" heigth="100%" src="resources/images/popup_image_1.jpg">
-    			<form class="popup_1_form" action="/frontLine/Popup">
-    				<div class="popup_1_main">
-    					<div>
-    						<input class="popup_1_checkbox" type="checkbox" name="popup1"> 10초동안 보지않기
-    					</div> 
-    					<input class="popup_submit_1" type="submit" value="닫기">
-    				</div>
-    			</form>
-    		</div>
-   			<%
-   		}
-   		
-   		if(popup2_count == 0){
-   			%>
-   			<div class="popup_2">
-   	    		<img width="100%" heigth="100%" src="resources/images/popup_image_2.jpg">
-   	    		<form class="popup_2_form" action="/frontLine/Popup">
-   	    			<div class="popup_2_main">
-   	    				<div>
-   	    					<input class="popup_2_checkbox" type="checkbox" name="popup2"> 10초동안 보지않기
-   	    				</div> 
-   	    				<input class="popup_submit_2" type="submit" value="닫기">
-   	    			</div>
-   	    		</form>
-   	    	</div>
-   	    	<%
-   		}
    	%>
 </body>
 </html>
