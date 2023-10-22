@@ -111,7 +111,7 @@ window.addEventListener("load", function () {
                 foods[i].addEventListener('click', function () {
                     console.log(i)
                     if (i == 0) {
-                        location.href = "ch_food_detail.html"
+                        location.href = "ch_food_detail.jsp"
                     }
                     if (i == 1) {
                         location.href = "ch2_food_detail.html"
@@ -262,9 +262,7 @@ for (let i = 0; i < result.length; i++) {
             html_weather += result[0][4];
 
             // console.log(html_weather)
-            if (i == 4) {
-                html_weather += "°<br>"
-            }
+            
         }
 
         weather.innerHTML = html_weather;
@@ -476,7 +474,7 @@ function init() {
 
 
     sel.addEventListener('click', function () {
-        location.href = "./cheonAn_main.html"
+        location.href = "ch_main.jsp"
     })
     sel_2.addEventListener('click', function () {
         location.href = "./asan_main.html"

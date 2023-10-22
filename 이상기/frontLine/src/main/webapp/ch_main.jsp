@@ -1,17 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 	
-	<!-- Çì´õ ÀÚ¹Ù½ºÅ©¸³Æ® -->
+	<!-- í—¤ë” ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
     <script src="resources/js/header.js"></script>
-    <!-- Çì´õ ½ºÅ¸ÀÏ -->
+    <!-- í—¤ë” ìŠ¤íƒ€ì¼ -->
     <link rel="stylesheet" href="resources/css/header.css">
     
     <link rel="stylesheet" href="resources/css/cheonAn_main.css">
@@ -23,9 +22,6 @@
 </head>
 
 <body>
-
-    <!-- <div id="cs">
-    </div> -->
 	<jsp:include page="header.jsp"/>
     
     
@@ -48,15 +44,15 @@
                     <img class="snow"
                         src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/Snow.png?raw=true">
                 </div>
-                <div id="weather"></div>
+                <div class="weather_wrap"><div id="weather"></div><div>ë„</div></div>
             </div>
             <div class="title">
-                <p4>Ãµ¾È<br>
-                    º£½ºÆ® ¿©ÇàÁö</p4>
+                <p4>ì²œì•ˆ<br>
+                    ë² ìŠ¤íŠ¸ ì—¬í–‰ì§€</p4>
             </div>
             <div class="items">
                 <div class="itemss">
-                    ////////////////////////////////// ÀÌ¹ÌÁö ¹è¿­ Å¬·¡½º ÀÚµ¿ Ãß°¡¶õ //////////////////////////////////
+                    ////////////////////////////////// ì´ë¯¸ì§€ ë°°ì—´ í´ëž˜ìŠ¤ ìžë™ ì¶”ê°€ëž€ //////////////////////////////////
                 </div>
             </div>
             <div style="margin-top : 5px;"></div>
@@ -70,43 +66,43 @@
 
         <div class="second_line">
             <span>
-                <p4>´ëÃæ ³õÄ¡¸é ¾ÈµÉ ¸Ô°Å¸®</p4>
+                <p4>ëŒ€ì¶© ë†“ì¹˜ë©´ ì•ˆë  ë¨¹ê±°ë¦¬</p4>
             </span><br>
             <div style="margin-top : 5px;"></div>
             <span>
-                <p5>´ëÃæ ÀÇ¹Ì ÀÖ´Â Ãµ¾È¸ÀÁý</p5>
+                <p5>ëŒ€ì¶© ì˜ë¯¸ ìžˆëŠ” ì²œì•ˆë§›ì§‘</p5>
             </span><a href="./cheonAn_foodMore.html" class="item_more">
-                <p5>´õº¸±â</p5>
+                <p5>ë”ë³´ê¸°</p5>
             </a></span><br><br>
 
         </div>
 
         <div class="best_food">
-            ////////////////////////////////// ÀÌ¹ÌÁö ¹è¿­ Å¬·¡½º ÀÚµ¿ Ãß°¡¶õ //////////////////////////////////
+            ////////////////////////////////// ì´ë¯¸ì§€ ë°°ì—´ í´ëž˜ìŠ¤ ìžë™ ì¶”ê°€ëž€ //////////////////////////////////
         </div><br>
 
 
         <div class="second_line">
             <span>
-                <p4>´ëÃæ ³ª¸¸ÀÇ ¿©ÇàÀ» À§ÇÑ</p4>
+                <p4>ëŒ€ì¶© ë‚˜ë§Œì˜ ì—¬í–‰ì„ ìœ„í•œ</p4>
             </span><br>
             <div style="margin-top : 5px;"></div>
             <span>
-                <p5>´ëÃæ À¯¸íÇÑ Ãµ¾ÈÀÇ ÀÌ»öÀå¼Ò</p5>
+                <p5>ëŒ€ì¶© ìœ ëª…í•œ ì²œì•ˆì˜ ì´ìƒ‰ìž¥ì†Œ</p5>
             </span><a href="./cheonAn_playMore.html" class="item_more">
-                <p5>´õº¸±â</p5>
+                <p5>ë”ë³´ê¸°</p5>
             </a></span><br><br>
         </div>
 
         <div class="best_play">
-            ////////////////////////////////// ÀÌ¹ÌÁö ¹è¿­ Å¬·¡½º ÀÚµ¿ Ãß°¡¶õ //////////////////////////////////
+            ////////////////////////////////// ì´ë¯¸ì§€ ë°°ì—´ í´ëž˜ìŠ¤ ìžë™ ì¶”ê°€ëž€ //////////////////////////////////
         </div><br><br>
 
 
         <div class="best_sleep">
 
             <div id="sleep_img">
-                ////////////////////////////////// ÀÌ¹ÌÁö ¹è¿­ Å¬·¡½º ÀÚµ¿ Ãß°¡¶õ //////////////////////////////////
+                ////////////////////////////////// ì´ë¯¸ì§€ ë°°ì—´ í´ëž˜ìŠ¤ ìžë™ ì¶”ê°€ëž€ //////////////////////////////////
             </div>
 
 
@@ -115,14 +111,14 @@
                         src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/simbol_white.png?raw=true">
                 </div>
                 <div id="moreinn" style="color: white;">
-                    <p4>¸ÚÁø ¼÷¼Ò¸¦ ¸¸³ªº¸¼¼¿ä</p4><br><br><br>
+                    <p4>ë©‹ì§„ ìˆ™ì†Œë¥¼ ë§Œë‚˜ë³´ì„¸ìš”</p4><br><br><br>
                     <button type="button" class="sleep_more_btn">
-                        <p6>¼÷¼Ò ´õº¸±â</p6>
+                        <p6>ìˆ™ì†Œ ë”ë³´ê¸°</p6>
                 </div>
             </div>
         </div><br><br><br>
         <div style="text-align : center;">
-            <p4>ÃæÃ»³²µµ °ü±¤µµ½Ã</p4>
+            <p4>ì¶©ì²­ë‚¨ë„ ê´€ê´‘ë„ì‹œ</p4>
         </div><br><br>
 
         <div class="select_place_list">
@@ -164,7 +160,7 @@
         </div>
 
         <div class="chungnam_city">
-            ////////////////////////////////// ÀÌ¹ÌÁö ¹è¿­ Å¬·¡½º ÀÚµ¿ Ãß°¡¶õ //////////////////////////////////
+            ////////////////////////////////// ì´ë¯¸ì§€ ë°°ì—´ í´ëž˜ìŠ¤ ìžë™ ì¶”ê°€ëž€ //////////////////////////////////
         </div>
         <div>
 
@@ -174,9 +170,9 @@
             <div class="footer_div footer_wrap">
                 <div class="footer_div footer_top">
                     <div class="footer_div textdiv">
-                        <span><a href="../terms.html">ÀÌ¿ë¾à°ü</a>&nbsp;</span>|
-                        <span><a href="../terms.html">°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</a>&nbsp;</span>|
-                        <span><a href="../serviceCenter.html">°í°´¼¾ÅÍ</a></span>
+                        <span><a href="../terms.html">ì´ìš©ì•½ê´€</a>&nbsp;</span>|
+                        <span><a href="../terms.html">ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨</a>&nbsp;</span>|
+                        <span><a href="../serviceCenter.html">ê³ ê°ì„¼í„°</a></span>
                     </div>
                     <div class="footer_div icondiv">
                         <span><a href="https://www.facebook.com/?locale=ko_KR"><img
@@ -200,7 +196,7 @@
                     </div>
                     
                     <div class="footer_div text_footer">
-                        <div class="footer_div rightText">°í°´¼¾ÅÍ</div>
+                        <div class="footer_div rightText">ê³ ê°ì„¼í„°</div>
                         <div class="footer_div number">1313-1212</div>
                     </div>
                         
@@ -212,4 +208,4 @@
 
 </body>
 
-</html
+</html>
