@@ -35,6 +35,10 @@
 	section {
 		background-color: white;
 		width: 100%;
+		
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 	.mid_wrap {
 		display: flex;
@@ -44,6 +48,7 @@
 		text-align: center;
 		color: white;
 	}
+	
 </style>
 </head>
 <body>

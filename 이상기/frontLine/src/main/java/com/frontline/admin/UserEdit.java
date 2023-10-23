@@ -84,6 +84,13 @@ public class UserEdit extends HttpServlet {
 		    			System.out.println("수정된 userPhone : " + request.getParameter(name));
 		    		}
 		    		break;
+		    	case "userBirth":
+		    		if(request.getParameter(name) != "") {
+		    			System.out.println("수정전 userBirth : " + userData.getUserData().get(target).getUserBirth());
+		    			userData.getUserData().get(target).setUserBirth(request.getParameter(name));
+		    			System.out.println("수정된 userBirth : " + request.getParameter(name));
+		    		}
+		    		break;
 		    }
 		}
 		System.out.println("----------------------------------------------------");

@@ -56,11 +56,51 @@
 		})
 		
 		// 페이지 이동
-		$("input[id=page_num_button]").click(function(){
+		$("a[id=page_num_button]").click(function(){
 			$("#page_num").val($(this).attr("value"))
 			$("#page_num_submit").click()
 		})
 		
+		// prev 버튼
+		$("input[id=prev_button]").click(function(){
+			<%
+			int pageNumber_button = 1;
+			if(request.getParameter("pageNumber") != null){
+				pageNumber_button = Integer.parseInt(request.getParameter("pageNumber"));
+			}
+			%>
+			let pageNumber_button = "<%=pageNumber_button%>"
+			
+			if(pageNumber_button == 1){
+				
+			} else {
+				pageNumber_button = parseInt(pageNumber_button) - 1
+			}
+			
+			$("#page_num").val(pageNumber_button)
+			$("#page_num_submit").click()
+		})
+		
+		// next 버튼
+		$("input[id=next_button]").click(function(){
+			<%
+			pageNumber_button = 1;
+			if(request.getParameter("pageNumber") != null){
+				pageNumber_button = Integer.parseInt(request.getParameter("pageNumber"));
+			}
+			%>
+			let pageNumber_button = "<%=pageNumber_button%>"
+			let max_page = $(".page_num_button").length
+			
+			if(pageNumber_button == max_page){
+				<%--console.log("match")--%>
+			} else {
+				pageNumber_button = parseInt(pageNumber_button) + 1
+			}
+			
+			$("#page_num").val(pageNumber_button)
+			$("#page_num_submit").click()
+		})
 		
 		
 		
@@ -116,13 +156,11 @@
 		
 		position: absolute;
 		top: 20%;
-		left: 20%;
+		left: 50%;
 		
 		border: 2px solid rgb(71, 71, 71);
 		background-color: white;
 		
-		width: 50%;
-		height: 50%;
 		
 		padding-left: 5%;
 		padding-right: 5%;
@@ -140,7 +178,10 @@
 		display: none;
 	}
 	.page_num_form {
-	display: none;
+		display: none;
+	}
+	.page_num_button{
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -208,10 +249,15 @@
 				</c:forEach>
 				</table>
 				<div class="page">
-				페이지넘버 ${pageNumber}/${page}<br>
+				<input id="prev_button" type=button value="<">
 				<c:forEach var="i" begin="1" end="${page}">
-					<input type="button" id="page_num_button" value="${i}">
+					<a class="page_num_button" id="page_num_button" value="${i}" style="
+					<c:if test="${i == pageNumber}">
+					 font-weight:bold;
+					</c:if>">${i}
+					</a>
 				</c:forEach>
+				<input id="next_button" type=button value=">">
 					<form class="page_num_form" action="admin_user.jsp" method="post">
 						<c:out value="${number}"/>
 						<input id="page_num" type="text" name="pageNumber">
@@ -229,8 +275,6 @@
 					<div>이메일 : <a id="popup_email"></a><br><input type="text" name="userEmail"></div>
 					<div>핸드폰 번호 : <a id="popup_phone"></a><br><input type="text" name="userPhone"></div>
 					<div>생일 : <a id="popup_birth"></a><br><input type="text" name="userBirth"></div>
-					<div>회원가입일 : <a id="popup_reser"></a><br><input type="text" name="userRegDate"></div>
-					<div>등급 : <a id="popup_grade"></a><br><input type="text" name="userGrade"></div>
 					<input class="userTarget" type="text" name="userTarget">
 					<div class="popup_form_bottom">
 						<input type="submit" value="수정하기">
