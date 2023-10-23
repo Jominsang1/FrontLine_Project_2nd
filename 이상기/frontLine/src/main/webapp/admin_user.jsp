@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.frontline.db.UserDb" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@
 		// 수정버튼
 		$("input[value=수정]").click(function(){
 			
-			let target = Number($(this).attr("id"))
+			let target = Number($(this).attr("name"))
 			let target_num = Number($(this).attr("id"))+1;
 			
 			let name = $("tr").eq(target_num).children("td").eq(0).text()
@@ -48,11 +49,25 @@
 			
 		})
 		
-		// 취소버튼
+		// 팝업 취소버튼
 		$("input[value=취소]").click(function(){
 			
 			$(".popup").css("display", "none")
 		})
+		
+		// 페이지 이동
+		$("input[id=page_num_button]").click(function(){
+			$("#page_num").val($(this).attr("value"))
+			$("#page_num_submit").click()
+		})
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	})
@@ -84,6 +99,7 @@
 		
 		display: flex;
 		justify-content: center;
+		flex-direction: column;
 		
 		margin-top: 5%;
 	}
@@ -123,6 +139,9 @@
 	.userTarget {
 		display: none;
 	}
+	.page_num_form {
+	display: none;
+	}
 </style>
 </head>
 <body>
@@ -152,20 +171,53 @@
 						<th>등급</th>
 						<th>비고</th>
 					</tr>
+				
+				<%-- 한페이지당 행의 수 --%>
+				<fmt:parseNumber var="line" value="5"/>
+				<%	
+					int pageNumber = 1;
+					
+				if(request.getParameter("pageNumber") != null){
+					pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+					pageContext.setAttribute("pageNumber", pageNumber);
+				} else {
+					pageContext.setAttribute("pageNumber", pageNumber);
+				}
+				%>
+				
+				<c:set var="start" value="${line*(pageNumber-1)}"/>
+				<c:set var="end" value="${start+line-1}"/>
+				<c:set var="page" value="${sessionScope.userData.getUserData().size()/line+(1-(sessionScope.userData.getUserData().size()/line%1))%1}"/>
+				<fmt:parseNumber var="page" value="${page}"/>
+				
+				<c:set var="flag" value="false"/>
 				<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
-					<tr>
-						<td>${item.userName}</td>
-						<td>${item.userId}</td>
-						<td>${item.userPw}</td>
-						<td>${item.userEmail}</td>
-						<td>${item.userPhone}</td>
-						<td>${item.userBirth}</td>
-						<td>${item.userRegDate}</td>
-						<td>${item.userGrade}</td>
-						<td><input type="button" value="수정" id="${i.index}"></td>
-					</tr>
+					<c:if test="${sessionScope.userData.getUserData().indexOf(item) >= start && sessionScope.userData.getUserData().indexOf(item) <= end}">
+						<tr>
+							<td>${item.userName}</td>
+							<td>${item.userId}</td>
+							<td>${item.userPw}</td>
+							<td>${item.userEmail}</td>
+							<td>${item.userPhone}</td>
+							<td>${item.userBirth}</td>
+							<td>${item.userRegDate}</td>
+							<td>${item.userGrade}</td>
+							<td><input type="button" value="수정" id="${i.index-start}" name="${i.index}"></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 				</table>
+				<div class="page">
+				페이지넘버 ${pageNumber}/${page}<br>
+				<c:forEach var="i" begin="1" end="${page}">
+					<input type="button" id="page_num_button" value="${i}">
+				</c:forEach>
+					<form class="page_num_form" action="admin_user.jsp" method="post">
+						<c:out value="${number}"/>
+						<input id="page_num" type="text" name="pageNumber">
+						<input id="page_num_submit" type="submit">
+					</form>
+				</div>
 			</div>
 			
 			

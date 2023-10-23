@@ -52,7 +52,7 @@
 		<nav>
 			<div class="admin_menu admin_menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
 			<div class="admin_menu admin_menu_wrtie"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
-			<div class="admin_menu admin_menu_reser"><a href="admin_reser.jsp"><h1>예약내역 관리</h1></a></div>
+			<div class="admin_menu admin_menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
 		</nav>
 	
 		<section>

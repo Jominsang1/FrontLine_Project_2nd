@@ -41,14 +41,6 @@ public class UserEdit extends HttpServlet {
 		// 콘솔 출력
 		System.out.println("*관리자 정보 수정*");
 		System.out.println("----------------------------------------------------");
-		System.out.println("타겟 : "+request.getParameter("userTarget"));
-		System.out.println("이름 : " + request.getParameter("userName"));
-		System.out.println("아이디 : " + request.getParameter("userId"));
-		System.out.println("비밀번호 : " + request.getParameter("userPw"));
-		System.out.println("이메일 : " + request.getParameter("userEmail"));
-		System.out.println("휴대폰 번호 : " + request.getParameter("userPhone"));
-		System.out.println("생년월일 : " + request.getParameter("userBirth"));
-		System.out.println("----------------------------------------------------");
 		
 		HttpSession session = request.getSession();
 		
@@ -66,24 +58,28 @@ public class UserEdit extends HttpServlet {
 		    switch(name) {
 		    	case "userName":
 		    		if(request.getParameter(name) != "") {
+		    			System.out.println("수정전 userName : " + userData.getUserData().get(target).getUserName());
 		    			userData.getUserData().get(target).setUserName(request.getParameter(name));
 		    			System.out.println("수정된 userName : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userPw":
 		    		if(request.getParameter(name) != "") {
+		    			System.out.println("수정전 userPw : " + userData.getUserData().get(target).getUserPw());
 		    			userData.getUserData().get(target).setUserPw(request.getParameter(name));
 		    			System.out.println("수정된 userPw : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userEmail":
 		    		if(request.getParameter(name) != "") {
+		    			System.out.println("수정전 userEmail : " + userData.getUserData().get(target).getUserEmail());
 		    			userData.getUserData().get(target).setUserEmail(request.getParameter(name));
 		    			System.out.println("수정된 userEmail : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userPhone":
 		    		if(request.getParameter(name) != "") {
+		    			System.out.println("수정전 userPhone : " + userData.getUserData().get(target).getUserPhone());
 		    			userData.getUserData().get(target).setUserPhone(request.getParameter(name));
 		    			System.out.println("수정된 userPhone : " + request.getParameter(name));
 		    		}
