@@ -84,17 +84,20 @@
 		
 		<hr>
 		
-		<div class="comment_list">
+		<div class="comment_list_wrap">
 			<c:if test="${sessionScope.commentData != null }">
 				<c:forEach var="item" items="${sessionScope.commentData.commentData}" varStatus="i">
-				<div class="comment_list_wrap">
-					<div class="comment_list_title">아이디 : ${sessionScope.commentData.commentData.get(i.index).getCommentId()} 등급 : ${sessionScope.commentData.commentData.get(i.index).getCommentGrade()} </div>
-					<div class="comment_list_text">${sessionScope.commentData.commentData.get(i.index).getCommentText()}</div>
-					<div>작성날짜 : ${sessionScope.commentData.commentData.get(i.index).getCommentRegDate()}</div>
+				<div class="comment_list">
+					<div>
+						<div class="comment_list_title">아이디 : ${sessionScope.commentData.commentData.get(i.index).getCommentId()} 등급 : ${sessionScope.commentData.commentData.get(i.index).getCommentGrade()} </div>
+						<div class="comment_list_text">${sessionScope.commentData.commentData.get(i.index).getCommentText()}</div>
+						<div>작성날짜 : ${sessionScope.commentData.commentData.get(i.index).getCommentRegDate()}</div>
+					</div>
+					<div>
+						<input class="comment_list_button" type="submit" value="답글달기">
+					</div>
 				</div>
-				<div class="comment_list_button">
-					<input class="comment_submit" type="submit" value="등록">
-				</div>
+				
 				</c:forEach>
 			</c:if>
 		</div>
