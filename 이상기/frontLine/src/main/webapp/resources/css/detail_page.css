@@ -398,12 +398,6 @@ p1 {
     margin-right: 30px;
 }
 
-li {
-    list-style-image: url("https://github.com/Jominsang1/FrontLine_Project/blob/main/images/User_icon.png?raw=true");
-    margin-left: 3%;
-    margin-top: 3%;
-}
-
 #submit-comment {
     width: 60px;
     height: 35px;
@@ -504,7 +498,32 @@ li {
     background-color: #F0F0F0;
 }
 
+/* 댓글관련 수정 */
 
+hr {
+	margin: 2%;
+}
+.comment_wrap {
+	height: 1000px;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+.comment_form {
+	display: flex;
+}
+.comment_text {
+	width: 90%;
+    height: 6.25em;
+    resize: none;
+}
+.comment_submit {
+	width: 100px;
+	margin-left: 1%;
+}
+.comment_list_wrap {
+	border: 1px solid black;
+	padding: 1%;
+}
 
 
 

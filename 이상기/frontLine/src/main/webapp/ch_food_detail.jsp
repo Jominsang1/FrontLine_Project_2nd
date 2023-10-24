@@ -1,29 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a550ab36f8fa23b9d230a1ee3036c93f&libraries=services"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="resources/css/detail_page.css">
-
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    
-
-	
-		<script src="resources/js/detail_page.js"></script>
-		
-		
-    
+	<script src="resources/js/detail_page.js"></script>
+	<link rel="stylesheet" href="resources/css/detail_page.css">
+	<!-- 헤더 자바스크립트 -->
+    <script src="resources/js/header.js"></script>
+    <!-- 헤더 스타일 -->
+    <link rel="stylesheet" href="resources/css/header.css">
+    <!-- 푸터 스타일 -->
+    <link rel="stylesheet" href="resources/css/footer.css">
 </head>
 
 <body>
-
+	<jsp:include page="header.jsp"/>
     <div class="wrap">
         <div class="div1">
             <div class="div1 area">
@@ -73,31 +72,33 @@
 
         </div>
     </div>
-
-
-
-    <div class="div5">
-        <div class="div5 review" style="margin-left: 20px;">
-            리뷰<img src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/pencil-light.png?raw=true">
-        </div>
-        <div class="div5 bt">
-            <input id="submit-comment" type="button" value="등록">
-        </div>
-    </div>
-
-    <div>
-        <hr style="margin:30px;">
-    </div>
-
-    <div class="comments_section">
-        <input id="comment-input" type="text" placeholder="소중한 댓글을 남겨주세요"
-            style="width:1820px; height:142px; border-color: #474747; margin:20px;">
-    </div>
-
-    <ul id="comment-list"></ul>
-
-
+	
+	<hr>
+	
+	<div class="comment_wrap">
+		<h1>댓글</h1>
+		<form class="comment_form" action="Comment">
+			<textarea class="comment_text" name="commentText"></textarea>
+			<input class="comment_submit" type="submit" value="등록">
+		</form>
+		
+		<hr>
+		
+		<div class="comment_list">
+			<c:if test="${sessionScope.commentData != null }">
+				<c:forEach var="item" items="${sessionScope.commentData.commentData}" varStatus="i">
+				<div class="comment_list_wrap">
+					<div class="comment_list_title">아이디 : ${sessionScope.commentData.commentData.get(i.index).getCommentId()} 등급 : ${sessionScope.commentData.commentData.get(i.index).getCommentGrade()} </div>
+					<div class="comment_list_text">${sessionScope.commentData.commentData.get(i.index).getCommentText()}</div>
+					<div>작성날짜 : ${sessionScope.commentData.commentData.get(i.index).getCommentRegDate()}</div>
+				</div>
+				<div class="comment_list_button">
+					<input class="comment_submit" type="submit" value="등록">
+				</div>
+				</c:forEach>
+			</c:if>
+		</div>
+	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
-
-
 </html>

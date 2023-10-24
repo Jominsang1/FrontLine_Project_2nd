@@ -142,6 +142,8 @@
 		flex-direction: column;
 		
 		margin-top: 5%;
+		margin-left: 10%;
+		margin-right: 10%;
 	}
 	.mid_wrap {
 		display: flex;
@@ -149,7 +151,13 @@
 	}
 	.admin_menu {
 		text-align: center;
+	}
+	.admin_menu a{
+		text-decoration: none;
 		color: white;
+	}
+	.menu_user a{
+		color: #FFD400;
 	}
 	.popup	{
 		display: none;
@@ -183,6 +191,9 @@
 	.page_num_button{
 		cursor: pointer;
 	}
+	.page {
+		margin-top: 5%;
+	}
 </style>
 </head>
 <body>
@@ -190,7 +201,7 @@
 	<div class="mid_wrap">
 		<nav>
 			<div class="admin_menu menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
-			<div class="admin_menu menu_wrtie"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
+			<div class="admin_menu menu_write"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
 			<div class="admin_menu menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
 		</nav>
 	

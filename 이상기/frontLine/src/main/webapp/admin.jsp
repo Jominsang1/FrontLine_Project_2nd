@@ -46,8 +46,13 @@
 	}
 	.admin_menu {
 		text-align: center;
+	}
+	.admin_menu a{
+		text-decoration: none;
 		color: white;
 	}
+	
+	
 	
 </style>
 </head>

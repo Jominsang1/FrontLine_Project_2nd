@@ -70,7 +70,6 @@ public class Login extends HttpServlet {
 			userBean = userData.getUserData().get(target);
 			
 			session.setAttribute("userBean", userBean);
-			
 			session.setAttribute("userData", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 성공");
