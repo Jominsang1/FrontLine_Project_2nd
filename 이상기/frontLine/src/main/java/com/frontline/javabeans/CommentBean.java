@@ -1,11 +1,21 @@
 package com.frontline.javabeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommentBean {
+	private List<CommentBean> commentData = new ArrayList<CommentBean>();
 	private String commentId;
 	private String commentText;
 	private String commentRegDate;
 	private String commentGrade;
 	
+	public List<CommentBean> getCommentData() {
+		return commentData;
+	}
+	public void setCommentData(List<CommentBean> commentData) {
+		this.commentData = commentData;
+	}
 	public String getCommentId() {
 		return commentId;
 	}

@@ -60,9 +60,36 @@
 	<jsp:include page="header.jsp"/>
 	<div class="mid_wrap">
 		<nav>
-			<div class="admin_menu menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
-			<div class="admin_menu menu_write"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
-			<div class="admin_menu menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
+			<div class="admin_menu admin_menu_user">
+				<a href="admin_user.jsp">
+					<h1>회원 관리</h1>
+				</a>
+				<a>
+					<h3>회원 목록</h3>
+				</a>
+				<a>
+					<h3>댓글 목록</h3>
+				</a>
+			</div>
+			<div class="admin_menu admin_menu_wrtie">
+				<a href="admin_write.jsp">
+					<h1>게시물 관리</h1>
+				</a>
+				<a>
+					<h3>맛집</h3>
+				</a>
+				<a>
+					<h3>여행지</h3>
+				</a>
+				<a>
+					<h3>숙소</h3>
+				</a>
+			</div>
+			<div class="admin_menu admin_menu_reser">
+				<a href="admin_reser.jsp">
+					<h1>예약 관리</h1>
+				</a>
+			</div>
 		</nav>
 	
 		<section>

@@ -101,15 +101,13 @@
 			$("#page_num").val(pageNumber_button)
 			$("#page_num_submit").click()
 		})
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	})
+</script>
+<script>
+	$("document").ready(function(){
+		$(".admin_menu").click(function(){
+			$(this).siblings().css("display", "blcok")
+		})
 	})
 </script>
 <style>
@@ -149,12 +147,15 @@
 		display: flex;
 		height: 90%;
 	}
-	.admin_menu {
+	.admin_ul {
 		text-align: center;
-	}
-	.admin_menu a{
-		text-decoration: none;
 		color: white;
+		
+		list-style:none;
+   		padding-left:0px;
+	}
+	.admin_menu_under {
+		display: none;
 	}
 	.menu_user a{
 		color: #FFD400;
@@ -200,14 +201,44 @@
 	<jsp:include page="header.jsp"/>
 	<div class="mid_wrap">
 		<nav>
-			<div class="admin_menu menu_user"><a href="admin_user.jsp"><h1>회원 관리</h1></a></div>
-			<div class="admin_menu menu_write"><a href="admin_write.jsp"><h1>게시물 관리</h1></a></div>
-			<div class="admin_menu menu_reser"><a href="admin_reser.jsp"><h1>예약 관리</h1></a></div>
+			<ul class="admin_ul">
+				<li class="admin_menu">
+					<h1>회원 관리</h1>
+				</li>
+				<li class="admin_menu_under">
+					<h3>회원 목록</h3>
+				</li>
+				<li class="admin_menu_under">
+					<h3>댓글 목록</h3>
+				</li>
+			</ul>
+			<ul class="admin_ul">
+				<li class="admin_menu">
+					<h1>게시물 관리</h1>
+				</li>
+				<li class="admin_menu_under">
+					<h3>맛집</h3>
+				</li>
+				<li class="admin_menu_under">
+					<h3>여행지</h3>
+				</li>
+				<li class="admin_menu_under">
+					<h3>숙소</h3>
+				</li>
+				</ul>
+			</ul>
+			<ul class="admin_ul">
+				<li class="admin_menu">
+					<h1>예약 관리</h1>
+				</li>
+				<li class="admin_menu_under">
+				</li>
+			</ul>
 		</nav>
 	
 		<section>
 			<div class="section_title">
-				<h1>회원관리 페이지입니다.</h1>
+				<h1>회원목록</h1>
 			</div>
 			
 			<div class="section_table">

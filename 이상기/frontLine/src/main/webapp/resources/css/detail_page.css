@@ -513,7 +513,6 @@ hr {
 }
 .comment_text {
 	width: 100%;
-    height: 6.25em;
     resize: none;
 }
 .comment_submit {
@@ -530,11 +529,31 @@ hr {
 	
 	margin-bottom: 1%;
 }
-.comment_list_button {
+.comment_list_form {
+	display: none;
+	margin-bottom: 1%;
 }
-
-
-
+.comment_list_text {
+    resize: none;
+    
+    width: 100%;
+}
+.comment_list_submit {
+	width: 100px;
+	margin-left: 1%;
+}
+.comment_list_target {
+	display: none;
+}
+.coComment_list_wrap {
+	border: 1px solid grey;
+	width: 90%;
+	
+	padding: 1%;
+	
+	margin-left: 8%;
+	margin-bottom: 1%;
+}
 
 
 

@@ -19,6 +19,26 @@
     <link rel="stylesheet" href="resources/css/header.css">
     <!-- 푸터 스타일 -->
     <link rel="stylesheet" href="resources/css/footer.css">
+    <script>
+    <%-- 댓글기능 관련 스크립트 --%>
+    $(function(){
+    	$(".comment_list_button").click(function(){
+    		let num = $(this).parent().parent().attr("id")
+    		
+    		console.log(num)
+    		
+    		if($("form[id="+num+"]").css("display") == "none"){
+    			$("form[id="+num+"]").css("display", "flex")
+    			$(this).attr("value", "답글접기")
+    		} else {
+    			$("form[id="+num+"]").css("display", "none")
+    			$(this).attr("value", "답글달기")
+    		}
+    		
+    	})
+    })
+    	
+    </script>
 </head>
 
 <body>
@@ -87,7 +107,7 @@
 		<div class="comment_list_wrap">
 			<c:if test="${sessionScope.commentData != null }">
 				<c:forEach var="item" items="${sessionScope.commentData.commentData}" varStatus="i">
-				<div class="comment_list">
+				<div class="comment_list" id="${i.index}">
 					<div>
 						<div class="comment_list_title">아이디 : ${sessionScope.commentData.commentData.get(i.index).getCommentId()} 등급 : ${sessionScope.commentData.commentData.get(i.index).getCommentGrade()} </div>
 						<div class="comment_list_text">${sessionScope.commentData.commentData.get(i.index).getCommentText()}</div>
@@ -97,7 +117,22 @@
 						<input class="comment_list_button" type="submit" value="답글달기">
 					</div>
 				</div>
-				
+				<div>
+					<form class="comment_list_form" id="${i.index}" action="Comment">
+						<textarea class="comment_list_text" name="commentText"></textarea>
+						<input class="comment_list_target" type="text" value="${i.index}" name="commentTarget">
+						<input class="comment_list_submit" type="submit" value="등록">
+					</form>
+				</div>
+					<c:if test="${item.getCommentData().isEmpty() == false}">
+						<c:forEach var="item" items="${item.getCommentData()}" varStatus="i">
+							<div class="coComment_list_wrap">
+								<div class="coComment_list_title">아이디 : ${item.getCommentId()} 등급 : ${item.getCommentGrade()} </div>
+								<div class="coComment_list_text">${item.getCommentText()}</div>
+								<div>작성날짜 : ${item.getCommentRegDate()}</div>
+							</div>
+						</c:forEach>
+					</c:if>
 				</c:forEach>
 			</c:if>
 		</div>

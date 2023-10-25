@@ -54,13 +54,21 @@ public class Comment extends HttpServlet {
 		commentBean.setCommentRegDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY년 MM월 dd일 HH시 mm분 ss초")));
 		commentBean.setCommentGrade(userBean.getUserGrade());
 		
-		commentData.getCommentData().add(commentBean);
-		
-		System.out.println(commentBean);
-		
-		session.setAttribute("commentData", commentData);
-		
-		response.sendRedirect("ch_food_detail.jsp");
+		if(request.getParameter("commentTarget") != null) {
+			int target = Integer.parseInt(request.getParameter("commentTarget"));
+			
+			commentData.getCommentData().get(target).getCommentData().add(commentBean);
+			
+			session.setAttribute("commentData", commentData);
+			
+			response.sendRedirect("ch_food_detail.jsp");
+		} else {
+			commentData.getCommentData().add(commentBean);
+			
+			session.setAttribute("commentData", commentData);
+			
+			response.sendRedirect("ch_food_detail.jsp");
+		}
 	}
 
 	/**
