@@ -21,9 +21,12 @@
 <style>
 	body {
 		height: 100vh;
-		background-color: red;
 	}
-	nav{
+	main {
+		display: flex;
+		height: 90%;
+	}
+	aside{
 		height: 100%;
 		width: 20%;
 		background-color: rgb(71, 71, 71);
@@ -40,10 +43,6 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.mid_wrap {
-		display: flex;
-		height: 90%;
-	}
 	.admin_menu {
 		text-align: center;
 	}
@@ -52,30 +51,28 @@
 		color: white;
 	}
 	
-	
-	
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
-	<div class="mid_wrap">
-		<nav>
+	<main>
+		<aside>
 			<div class="admin_menu admin_menu_user">
-				<a href="admin_user.jsp">
+				<a>
 					<h1>회원 관리</h1>
 				</a>
-				<a>
+				<a href="admin_user.jsp">
 					<h3>회원 목록</h3>
 				</a>
-				<a>
+				<a href="admin_comment.jsp">
 					<h3>댓글 목록</h3>
 				</a>
 			</div>
 			<div class="admin_menu admin_menu_wrtie">
-				<a href="admin_write.jsp">
+				<a>
 					<h1>게시물 관리</h1>
 				</a>
-				<a>
+				<a href="admin_write.jsp">
 					<h3>맛집</h3>
 				</a>
 				<a>
@@ -90,11 +87,11 @@
 					<h1>예약 관리</h1>
 				</a>
 			</div>
-		</nav>
+		</aside>
 	
 		<section>
 			<h1>${sessionScope.userBean.userName}님 환영합니다.</h1>
 		</section>
-	</div>
+	</main>
 </body>
 </html>

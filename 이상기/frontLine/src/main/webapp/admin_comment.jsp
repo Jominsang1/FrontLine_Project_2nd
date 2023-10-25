@@ -25,23 +25,9 @@
 			let target = Number($(this).attr("name"))
 			let target_num = Number($(this).attr("id"))+1;
 			
-			let name = $("tr").eq(target_num).children("td").eq(0).text()
-			let id = $("tr").eq(target_num).children("td").eq(1).text()
-			let pw = $("tr").eq(target_num).children("td").eq(2).text()
-			let email = $("tr").eq(target_num).children("td").eq(3).text()
-			let phone = $("tr").eq(target_num).children("td").eq(4).text()
-			let birth = $("tr").eq(target_num).children("td").eq(5).text()
-			let reser = $("tr").eq(target_num).children("td").eq(6).text()
-			let grade = $("tr").eq(target_num).children("td").eq(7).text()
+			let text = $("tr").eq(target_num).children("td").eq(2).text()
 			
-			$("#popup_name").text(name)
-			$("#popup_id").text(id)
-			$("#popup_pw").text(pw)
-			$("#popup_email").text(email)
-			$("#popup_phone").text(phone)
-			$("#popup_birth").text(birth)
-			$("#popup_reser").text(reser)
-			$("#popup_grade").text(grade)
+			$("#popup_text").text(text)
 			
 			$("input[name=userTarget]").val(target)
 			
@@ -223,7 +209,7 @@
 				</a>
 			</div>
 			<div class="admin_menu admin_menu_reser">
-				<a href="admin_reser.jsp">
+				<a>
 					<h1>예약 관리</h1>
 				</a>
 			</div>
@@ -231,21 +217,19 @@
 	
 		<section>
 			<div class="section_title">
-				<h1>회원 목록</h1>
+				<h1>댓글 목록</h1>
 			</div>
 			
 			<div class="section_table">
 				<table border="1">
 					<tr>
-						<th>이름</th>
+						<th>위치</th>
 						<th>아이디</th>
-						<th>비밀번호</th>
-						<th>이메일</th>
-						<th>핸드폰 번호</th>
-						<th>생일</th>
-						<th>회원가입일</th>
+						<th>내용</th>
+						<th>작성시간</th>
 						<th>등급</th>
-						<th>비고</th>
+						<th>수정</th>
+						<th>삭제</th>
 					</tr>
 				
 				<%-- 한페이지당 행의 수 --%>
@@ -263,23 +247,33 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.userData.getUserData().size()/line+(1-(sessionScope.userData.getUserData().size()/line%1))%1}"/>
+				<c:set var="page" value="${sessionScope.commentData.getCommentData().size()/line+(1-(sessionScope.commentData.getCommentData().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
-				
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
-					<c:if test="${sessionScope.userData.getUserData().indexOf(item) >= start && sessionScope.userData.getUserData().indexOf(item) <= end}">
+				<c:forEach var="item" items="${sessionScope.commentData.getCommentData()}" varStatus="i">
+					<c:if test="${sessionScope.commentData.getCommentData().indexOf(item) >= start && sessionScope.commentData.getCommentData().indexOf(item) <= end}">
 						<tr>
-							<td>${item.userName}</td>
-							<td>${item.userId}</td>
-							<td>${item.userPw}</td>
-							<td>${item.userEmail}</td>
-							<td>${item.userPhone}</td>
-							<td>${item.userBirth}</td>
-							<td>${item.userRegDate}</td>
-							<td>${item.userGrade}</td>
-							<td><input type="button" value="수정" id="${i.index-start}" name="${i.index}"></td>
+							<td>댓글</td>
+							<td>${item.commentId}</td>
+							<td>${item.commentText}</td>
+							<td>${item.commentRegDate}</td>
+							<td>${item.commentGrade}</td>
+							<td><input type="button" value="수정" class="co" id="${i.index-start}" name="${i.index}"></td>
+							<td><input type="button" value="삭제" class="co" id="${i.index-start}" name="${i.index}"></td>
 						</tr>
+						<c:if test="${item.commentData.isEmpty() == false}">
+							<c:forEach var="item" items="${item.getCommentData()}" varStatus="j">
+							<tr>
+								<td>답글</td>
+								<td>${item.commentId}</td>
+								<td>${item.commentText}</td>
+								<td>${item.commentRegDate}</td>
+								<td>${item.commentGrade}</td>
+								<td><input type="button" value="수정" class="coco" id="${i.index-start}" name="${j.index}"></td>
+								<td><input type="button" value="삭제" class="coco" id="${i.index-start}" name="${j.index}"></td>
+							</tr>
+						</c:forEach>
+						</c:if>
 					</c:if>
 				</c:forEach>
 				</table>
@@ -293,7 +287,7 @@
 					</a>
 				</c:forEach>
 				<input id="next_button" type=button value=">">
-					<form class="page_num_form" action="admin_user.jsp" method="post">
+					<form class="page_num_form" action="admin_comment.jsp" method="post">
 						<c:out value="${number}"/>
 						<input id="page_num" type="text" name="pageNumber">
 						<input id="page_num_submit" type="submit">
@@ -305,11 +299,7 @@
 			<div class="popup">
 				<form id="popup_form" action="/frontLine/UserEdit">
 				<div class="popup_form_title"><h1>수정페이지</h1></div>
-					<div>이름 : <a id="popup_name"></a><br><input type="text" name="userName"></div>
-					<div>비밀번호 : <a id="popup_pw"></a><br><input type="text" name="userPw"></div>
-					<div>이메일 : <a id="popup_email"></a><br><input type="text" name="userEmail"></div>
-					<div>핸드폰 번호 : <a id="popup_phone"></a><br><input type="text" name="userPhone"></div>
-					<div>생일 : <a id="popup_birth"></a><br><input type="text" name="userBirth"></div>
+					<div>수정할 내용 : <a id="popup_text"></a><br><input type="text" name="commentText"></div>
 					<input class="userTarget" type="text" name="userTarget">
 					<div class="popup_form_bottom">
 						<input type="submit" value="수정하기">

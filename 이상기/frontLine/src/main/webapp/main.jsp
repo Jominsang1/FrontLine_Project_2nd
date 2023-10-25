@@ -711,28 +711,20 @@
         }
         
         function popup_close(){
-        	let submit1 = document.querySelector(".popup_submit_1");
-        	let submit2 = document.querySelector(".popup_submit_2");
-        	
-        	submit1.addEventListener("click", function(event){
-        		
-        		if(document.querySelector(".popup_1_checkbox").checked == false){
-        			event.preventDefault();
+        	$("#popup_1_button").click(function(){
+        		$(".popup_1").css("display", "none")
+        		console.log($("#popup_1_checkbox").is(":checked"))
+        		if($("#popup_1_checkbox").is(":checked") == true){
+        			$("#popup_1_submit").click()
         		}
-        		
-        		document.querySelector(".popup_1").style.display = "none";
-        		
         	})
         	
-        	submit2.addEventListener("click", function(event){
-        		
-        		if(document.querySelector(".popup_2_checkbox").checked == false){
-        			event.preventDefault();
+        	$("#popup_2_button").click(function(){
+        		$(".popup_2").css("display", "none")
+        		console.log($("#popup_2_checkbox").is(":checked"))
+        		if($("#popup_2_checkbox").is(":checked") == true){
+        			$("#popup_2_submit").click()
         		}
-        		
-        		document.querySelector(".popup_2").style.display = "none";
-        		
-        		
         	})
         }
     </script>
@@ -829,6 +821,10 @@
         	justify-content: space-between;
         }
         
+        .popup_1_submit, .popup_2_submit {
+        	display: none;
+        }
+        
 </style>
 
     
@@ -900,14 +896,15 @@
    	   		
    	   		if(popup1_count == 0){
    	   			%>
-   	   			<div class="popup_1">
+   	   			<div class="popup_1" id="popup_1">
    	    			<img width="100%" heigth="100%" src="resources/images/popup_image_1.jpg">
    	    			<form class="popup_1_form" action="/frontLine/Popup">
    	    				<div class="popup_1_main">
    	    					<div>
-   	    						<input class="popup_1_checkbox" type="checkbox" name="popup1"> 10초동안 보지않기
+   	    						<input id="popup_1_checkbox" type="checkbox" name="popup1"> 10초동안 보지않기
    	    					</div> 
-   	    					<input class="popup_submit_1" type="submit" value="닫기">
+   	    					<input class="popup_1_submit" id="popup_1_submit" type="submit">
+   	   	    				<input id="popup_1_button" type="button" value="닫기">
    	    				</div>
    	    			</form>
    	    		</div>
@@ -916,14 +913,15 @@
    	   		
    	   		if(popup2_count == 0){
    	   			%>
-   	   			<div class="popup_2">
+   	   			<div class="popup_2" id="popup_2">
    	   	    		<img width="100%" heigth="100%" src="resources/images/popup_image_2.jpg">
    	   	    		<form class="popup_2_form" action="/frontLine/Popup">
    	   	    			<div class="popup_2_main">
    	   	    				<div>
-   	   	    					<input class="popup_2_checkbox" type="checkbox" name="popup2"> 10초동안 보지않기
+   	   	    					<input id="popup_2_checkbox" type="checkbox" name="popup2"> 10초동안 보지않기
    	   	    				</div> 
-   	   	    				<input class="popup_submit_2" type="submit" value="닫기">
+   	   	    				<input class="popup_2_submit" id="popup_2_submit" type="submit">
+   	   	    				<input id="popup_2_button" type="button" value="닫기">
    	   	    			</div>
    	   	    		</form>
    	   	    	</div>
