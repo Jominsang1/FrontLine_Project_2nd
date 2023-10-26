@@ -40,7 +40,9 @@ public class Comment extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		
+		if(session.getAttribute("userBean") == null) {
+			response.getWriter().println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		}
 		UserBean userBean = (UserBean)session.getAttribute("userBean");
 		CommentBean commentBean = new CommentBean();
 		CommentDb commentData = new CommentDb();

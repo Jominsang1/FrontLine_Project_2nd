@@ -2,25 +2,31 @@ package com.frontline.javabeans;
 
 import java.time.*;
 
-public class ReservationDTO {
+public class RoomDTO {
 	String roomTitle;
-	String roomNumber;
+	String roomAddress;
+	String roomPrice;
 	String roomImage;
 	String roomDetail;
 	LocalDateTime startDate;
 	LocalDateTime endDate;
-	
 	public String getRoomTitle() {
 		return roomTitle;
 	}
 	public void setRoomTitle(String roomTitle) {
 		this.roomTitle = roomTitle;
 	}
-	public String getRoomNumber() {
-		return roomNumber;
+	public String getRoomAddress() {
+		return roomAddress;
 	}
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
+	public void setRoomAddress(String roomAddress) {
+		this.roomAddress = roomAddress;
+	}
+	public String getRoomPrice() {
+		return roomPrice;
+	}
+	public void setRoomPrice(String roomPrice) {
+		this.roomPrice = roomPrice;
 	}
 	public String getRoomImage() {
 		return roomImage;
@@ -46,7 +52,6 @@ public class ReservationDTO {
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
-	
 	
 	
 }

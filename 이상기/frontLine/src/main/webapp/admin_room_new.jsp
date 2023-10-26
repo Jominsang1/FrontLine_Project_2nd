@@ -26,7 +26,15 @@
 	<main>
 		<jsp:include page="admin_aside.jsp"/>
 		<section>
-			<h1>예약관리 페이지입니다.</h1>
+			<h1>숙소 등록 페이지입니다.</h1>
+			<form action="/frontLine/RoomNew">
+				숙소 이름 : <input type="text" name="roomTitle"><br>
+				숙소 주소 : <input type="text" name="roomAddress"><br>
+				숙소 가격 : <input type="text" name="roomPrice"><br>
+				숙소 이미지 : <input type="text" name="roomImage"><br>
+				숙소 상세설명 : <input type="text" name="roomDetail"><br>
+				<input type="submit" value="등록">
+			</form>
 		</section>
 	</main>
 </body>

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.frontline.db.UserDb" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,31 +22,34 @@
 	$("document").ready(function(){
 		// 수정버튼
 		$("input[value=수정]").click(function(){
-			
 			let target = Number($(this).attr("name"))
 			let target_num = Number($(this).attr("id"))+1;
 			
-			let name = $("tr").eq(target_num).children("td").eq(0).text()
-			let id = $("tr").eq(target_num).children("td").eq(1).text()
-			let pw = $("tr").eq(target_num).children("td").eq(2).text()
-			let email = $("tr").eq(target_num).children("td").eq(3).text()
-			let phone = $("tr").eq(target_num).children("td").eq(4).text()
-			let birth = $("tr").eq(target_num).children("td").eq(5).text()
-			let reser = $("tr").eq(target_num).children("td").eq(6).text()
-			let grade = $("tr").eq(target_num).children("td").eq(7).text()
+			let title = $("tr").eq(target_num).children("td").eq(0).text()
+			let address = $("tr").eq(target_num).children("td").eq(1).text()
+			let price = $("tr").eq(target_num).children("td").eq(2).text()
+			let image = $("tr").eq(target_num).children("td").eq(3).text()
+			let detail = $("tr").eq(target_num).children("td").eq(4).text()
 			
-			$("#popup_name").text(name)
-			$("#popup_id").text(id)
-			$("#popup_pw").text(pw)
-			$("#popup_email").text(email)
-			$("#popup_phone").text(phone)
-			$("#popup_birth").text(birth)
-			$("#popup_reser").text(reser)
-			$("#popup_grade").text(grade)
+			$("#popup_title").text(title)
+			$("#popup_address").text(address)
+			$("#popup_price").text(price)
+			$("#popup_image").text(image)
+			$("#popup_detail").text(detail)
 			
 			$("input[name=userTarget]").val(target)
 			
 			$(".popup").css("display", "block")
+		})
+		
+		// 삭제버튼
+		$("input[value=삭제]").click(function(){
+			let target = $(this).attr("id")
+			
+			$("input[name=roomTarget]").val($(this).attr("name"))
+			
+			$("#popup_form").attr("action", "/frontLine/RoomDelete")
+			$("#popup_submit").click();
 			
 		})
 		
@@ -105,65 +107,27 @@
 		})
 	})
 </script>
-<script>
-	$("document").ready(function(){
-		$(".admin_menu").click(function(){
-			$(this).siblings().css("display", "blcok")
-		})
-	})
-</script>
 <style>
-	.section_title {
-		text-align: center;
-	}
-	.section_table {
-		text-align: center;
-		
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		
-		margin-top: 5%;
-		margin-left: 10%;
-		margin-right: 10%;
-	}
-	.popup	{
-		display: none;
-		
-		position: absolute;
-		top: 20%;
-		left: 50%;
-		
-		border: 2px solid rgb(71, 71, 71);
-		background-color: white;
-		
-		
-		padding-left: 5%;
-		padding-right: 5%;
-	}
-	.popup_form_title {
-		display: flex;
-		
-		text-align: center;
-	}
-	.popup_form_bottom {
-		display: flex;
-		justify-content: center
-	}
-	.userTarget {
-		display: none;
-	}
 	.page_num_form {
 		display: none;
 	}
-	.page_num_button{
-		cursor: pointer;
-	}
-	.page {
-		margin-top: 5%;
-	}
 	.table_no {
 		border: none;
+	}
+	.popup {
+		display: none;
+		
+		position: absolute;
+		
+		top: 20%;
+		left: 50%;
+		
+		background-color: white;
+		border: 1px solid black;
+		padding: 1%;
+	}
+	.roomTarget {
+		//display: none;
 	}
 </style>
 </head>
@@ -171,22 +135,21 @@
 	<jsp:include page="header.jsp"/>
 	<main>
 		<jsp:include page="admin_aside.jsp"/>
+	
 		<section>
 			<div class="section_title">
-				<h1>회원 목록</h1>
+				<h1>숙소 목록</h1>
 			</div>
 			
 			<div class="section_table">
 				<table border="1" frame="void">
 					<tr>
-						<th>이름</th>
-						<th>아이디</th>
-						<th>비밀번호</th>
-						<th>이메일</th>
-						<th>핸드폰 번호</th>
-						<th>생일</th>
-						<th>회원가입일</th>
-						<th>등급</th>
+						<th>숙소명</th>
+						<th>주소</th>
+						<th>가격</th>
+						<th>이미지</th>
+						<th>상세설명</th>
+						<th>예약일</th>
 					</tr>
 				
 				<%-- 한페이지당 행의 수 --%>
@@ -204,22 +167,20 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.userData.getUserData().size()/line+(1-(sessionScope.userData.getUserData().size()/line%1))%1}"/>
+				<c:set var="page" value="${sessionScope.RoomDb.getRoomData().size()/line+(1-(sessionScope.RoomDb.getRoomData().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
-				
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
-					<c:if test="${sessionScope.userData.getUserData().indexOf(item) >= start && sessionScope.userData.getUserData().indexOf(item) <= end}">
+				<c:forEach var="item" items="${sessionScope.RoomDb.getRoomData()}" varStatus="i">
+					<c:if test="${sessionScope.RoomDb.getRoomData().indexOf(item) >= start && sessionScope.RoomDb.getRoomData().indexOf(item) <= end}">
 						<tr>
-							<td>${item.userName}</td>
-							<td>${item.userId}</td>
-							<td>${item.userPw}</td>
-							<td>${item.userEmail}</td>
-							<td>${item.userPhone}</td>
-							<td>${item.userBirth}</td>
-							<td>${item.userRegDate}</td>
-							<td>${item.userGrade}</td>
+							<td>${item.getRoomTitle()}</td>
+							<td>${item.roomAddress}</td>
+							<td>${item.roomPrice}</td>
+							<td><img src="${item.roomImage}"></td>
+							<td>${item.roomDetail}</td>
+							<td><input type="button" value="보기" id="${i.index-start}" name="${i.index}"></td>
 							<td class="table_no"><input type="button" value="수정" id="${i.index-start}" name="${i.index}"></td>
+							<td class="table_no"><input type="button" value="삭제" id="${i.index-start}" name="${i.index}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -234,7 +195,7 @@
 					</a>
 				</c:forEach>
 				<input id="next_button" type=button value=">">
-					<form class="page_num_form" action="admin_user.jsp" method="post">
+					<form class="page_num_form" action="admin_room_management.jsp" method="post">
 						<c:out value="${number}"/>
 						<input id="page_num" type="text" name="pageNumber">
 						<input id="page_num_submit" type="submit">
@@ -244,14 +205,14 @@
 			
 			
 			<div class="popup">
-				<form id="popup_form" action="/frontLine/UserEdit">
+				<form id="popup_form" action="/frontLine/RoomEdit">
 				<div class="popup_form_title"><h1>수정페이지</h1></div>
-					<div>이름 : <a id="popup_name"></a><br><input type="text" name="userName"></div>
-					<div>비밀번호 : <a id="popup_pw"></a><br><input type="text" name="userPw"></div>
-					<div>이메일 : <a id="popup_email"></a><br><input type="text" name="userEmail"></div>
-					<div>핸드폰 번호 : <a id="popup_phone"></a><br><input type="text" name="userPhone"></div>
-					<div>생일 : <a id="popup_birth"></a><br><input type="text" name="userBirth"></div>
-					<input class="userTarget" type="text" name="userTarget">
+					<div>숙소명 : <a id="popup_title"></a><br><input type="text" name="roomTitle"></div>
+					<div>주소 : <a id="popup_address"></a><br><input type="text" name="roomAddress"></div>
+					<div>가격 : <a id="popup_price"></a><br><input type="text" name="userPrice"></div>
+					<div>이미지 : <a id="popup_image"></a><br><input type="text" name="userImage"></div>
+					<div>상세설명 : <a id="popup_detail"></a><br><input type="text" name="userDetail"></div>
+					<input class="roomTarget" type="text" name="roomTarget">
 					<div class="popup_form_bottom">
 						<input type="submit" value="수정하기">
 						<input type="button" value="취소">

@@ -13,6 +13,8 @@
 <script src="resources/js/header_admin.js"></script>
 <!-- 헤더 스타일 -->
 <link rel="stylesheet" href="resources/css/header.css">
+<!-- 관리자 메뉴 스타일 -->
+<link rel="stylesheet" href="resources/css/admin_aside.css">
 <script
   src="https://code.jquery.com/jquery-3.7.1.js"
   integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -117,37 +119,6 @@
 	})
 </script>
 <style>
-	body {
-		height: 100vh;
-	}
-	main {
-		display: flex;
-		height: 90%;
-	}
-	aside{
-		height: 100%;
-		width: 20%;
-		background-color: rgb(71, 71, 71);
-		
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-	}
-	section {
-		background-color: white;
-		width: 100%;
-		
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.admin_menu {
-		text-align: center;
-	}
-	.admin_menu a{
-		text-decoration: none;
-		color: white;
-	}
 	.section_title {
 		text-align: center;
 	}
@@ -197,43 +168,18 @@
 	.page {
 		margin-top: 5%;
 	}
+	.commentTarget, .coCommentTarget {
+		display: none;
+	}
+	.table_no {
+		border: none;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
 	<main>
-		<aside>
-			<div class="admin_menu admin_menu_user">
-				<a>
-					<h1>회원 관리</h1>
-				</a>
-				<a href="admin_user.jsp">
-					<h3>회원 목록</h3>
-				</a>
-				<a href="admin_comment.jsp">
-					<h3>댓글 목록</h3>
-				</a>
-			</div>
-			<div class="admin_menu admin_menu_wrtie">
-				<a>
-					<h1>게시물 관리</h1>
-				</a>
-				<a href="admin_write.jsp">
-					<h3>맛집</h3>
-				</a>
-				<a>
-					<h3>여행지</h3>
-				</a>
-				<a>
-					<h3>숙소</h3>
-				</a>
-			</div>
-			<div class="admin_menu admin_menu_reser">
-				<a>
-					<h1>예약 관리</h1>
-				</a>
-			</div>
-		</aside>
+		<jsp:include page="admin_aside.jsp"></jsp:include>
 	
 		<section>
 			<div class="section_title">
@@ -241,15 +187,13 @@
 			</div>
 			
 			<div class="section_table">
-				<table border="1">
+				<table border="1" frame="void">
 					<tr>
 						<th>위치</th>
 						<th>아이디</th>
 						<th>내용</th>
 						<th>작성시간</th>
 						<th>등급</th>
-						<th>수정</th>
-						<th>삭제</th>
 					</tr>
 				
 				<%-- 한페이지당 행의 수 --%>
@@ -278,8 +222,8 @@
 							<td>${item.commentText}</td>
 							<td>${item.commentRegDate}</td>
 							<td>${item.commentGrade}</td>
-							<td><input type="button" value="수정" class="co" id="${i.index}"></td>
-							<td><input type="button" value="삭제" class="co" id="${i.index}"></td>
+							<td class="table_no"><input type="button" value="수정" class="co" id="${i.index}"></td>
+							<td class="table_no"><input type="button" value="삭제" class="co" id="${i.index}"></td>
 						</tr>
 						<c:if test="${item.commentData.isEmpty() == false}">
 							<c:forEach var="item" items="${item.getCommentData()}" varStatus="j">
@@ -289,8 +233,8 @@
 								<td>${item.commentText}</td>
 								<td>${item.commentRegDate}</td>
 								<td>${item.commentGrade}</td>
-								<td><input type="button" value="수정" class="coco" id="${i.index}" name="${j.index}"></td>
-								<td><input type="button" value="삭제" class="coco" id="${i.index}" name="${j.index}"></td>
+								<td class="table_no"><input type="button" value="수정" class="coco" id="${i.index}" name="${j.index}"></td>
+								<td class="table_no"><input type="button" value="삭제" class="coco" id="${i.index}" name="${j.index}"></td>
 							</tr>
 						</c:forEach>
 						</c:if>
