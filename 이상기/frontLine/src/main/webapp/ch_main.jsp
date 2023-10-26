@@ -12,12 +12,12 @@
     <script src="resources/js/header.js"></script>
     <!-- 헤더 스타일 -->
     <link rel="stylesheet" href="resources/css/header.css">
-    
+    <!-- 지역 메인 css -->
     <link rel="stylesheet" href="resources/css/cheonAn_main.css">
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- 지역 메인 js -->
     <script src="resources/js/cheonAn_main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
 
 </head>
 

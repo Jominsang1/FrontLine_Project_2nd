@@ -21,17 +21,37 @@
 	$("document").ready(function(){
 		// 수정버튼
 		$("input[value=수정]").click(function(){
+			let text = $(this).parent().parent().children().eq(2).text()
+			let commentTarget = $(this).attr("id")
 			
-			let target = Number($(this).attr("name"))
-			let target_num = Number($(this).attr("id"))+1;
+			$("input[name=coCommentTarget]").val("-1")
 			
-			let text = $("tr").eq(target_num).children("td").eq(2).text()
+			if($(this).attr("name") != null){
+				$("input[name=coCommentTarget]").val($(this).attr("name"))
+			}
 			
 			$("#popup_text").text(text)
 			
-			$("input[name=userTarget]").val(target)
+			$("input[name=commentTarget]").val(commentTarget)
 			
 			$(".popup").css("display", "block")
+			
+		})
+		
+		// 삭제버튼
+		$("input[value=삭제]").click(function(){
+			let commentTarget = $(this).attr("id")
+			
+			$("input[name=coCommentTarget]").val("-1")
+			
+			if($(this).attr("name") != null){
+				$("input[name=coCommentTarget]").val($(this).attr("name"))
+			}
+			
+			$("input[name=commentTarget]").val(commentTarget)
+			
+			$("#popup_form").attr("action", "/frontLine/CommentDelete")
+			$("#popup_submit").click();
 			
 		})
 		
@@ -258,8 +278,8 @@
 							<td>${item.commentText}</td>
 							<td>${item.commentRegDate}</td>
 							<td>${item.commentGrade}</td>
-							<td><input type="button" value="수정" class="co" id="${i.index-start}" name="${i.index}"></td>
-							<td><input type="button" value="삭제" class="co" id="${i.index-start}" name="${i.index}"></td>
+							<td><input type="button" value="수정" class="co" id="${i.index}"></td>
+							<td><input type="button" value="삭제" class="co" id="${i.index}"></td>
 						</tr>
 						<c:if test="${item.commentData.isEmpty() == false}">
 							<c:forEach var="item" items="${item.getCommentData()}" varStatus="j">
@@ -269,8 +289,8 @@
 								<td>${item.commentText}</td>
 								<td>${item.commentRegDate}</td>
 								<td>${item.commentGrade}</td>
-								<td><input type="button" value="수정" class="coco" id="${i.index-start}" name="${j.index}"></td>
-								<td><input type="button" value="삭제" class="coco" id="${i.index-start}" name="${j.index}"></td>
+								<td><input type="button" value="수정" class="coco" id="${i.index}" name="${j.index}"></td>
+								<td><input type="button" value="삭제" class="coco" id="${i.index}" name="${j.index}"></td>
 							</tr>
 						</c:forEach>
 						</c:if>
@@ -297,12 +317,13 @@
 			
 			
 			<div class="popup">
-				<form id="popup_form" action="/frontLine/UserEdit">
+				<form id="popup_form" action="/frontLine/CommentEdit">
 				<div class="popup_form_title"><h1>수정페이지</h1></div>
 					<div>수정할 내용 : <a id="popup_text"></a><br><input type="text" name="commentText"></div>
-					<input class="userTarget" type="text" name="userTarget">
+					<input class="commentTarget" type="text" name="commentTarget">
+					<input class="coCommentTarget" type="text" name="coCommentTarget" value="-1">
 					<div class="popup_form_bottom">
-						<input type="submit" value="수정하기">
+						<input id="popup_submit" type="submit" value="수정하기">
 						<input type="button" value="취소">
 					</div>
 				</form>

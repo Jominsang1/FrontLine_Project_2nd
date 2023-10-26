@@ -65,10 +65,6 @@ public class Join extends HttpServlet {
 		
 		UserDb userData = new UserDb();
 		
-		for(int i = 0; i<userData.getUserData().size(); i++) {
-			userData.getUserData().get(i).toString();
-		}
-		
 		if(session.getAttribute("userData") == null) {
 			userData.getUserData().add(userBean);
 		} else {
