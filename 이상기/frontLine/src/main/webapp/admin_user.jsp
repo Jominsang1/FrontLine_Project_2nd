@@ -204,12 +204,18 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.UserDBKey.getUserList().size()/line+(1-(sessionScope.UserDBKey.getUserList().size()/line%1))%1}"/>
+				<c:set var="size" value="<%=UserDB.getUserList().size()%>"/>
+				<c:set var="page" value="${size/line+(1-(size/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
 				
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.UserDBKey.getUserList()}" varStatus="i">
-					<c:if test="${sessionScope.UserDBKey.getUserList().indexOf(item) >= start && sessionScope.UserDBKey.getUserList().indexOf(item) <= end}">
+				<c:forEach var="item" items="<%=UserDB.getUserList()%>" varStatus="i">
+				<%
+				int target = UserDB.getUserList().indexOf(pageContext.getAttribute("item")); 
+				Long start = (Long)pageContext.getAttribute("start");
+				Long end = (Long)pageContext.getAttribute("end");
+				%>
+					<c:if test="<%= target >= start && target <= end %>">
 						<tr>
 							<td>${item.userName}</td>
 							<td>${item.userId}</td>

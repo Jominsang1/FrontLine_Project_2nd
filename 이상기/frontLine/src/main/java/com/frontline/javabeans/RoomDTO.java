@@ -11,6 +11,18 @@ public class RoomDTO {
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	
+	public RoomDTO() {
+		
+	}
+	
+	public RoomDTO(String roomTitle, String roomAddress, String roomPrice, String roomImage, String roomDetail) {
+		this.roomTitle = roomTitle;
+		this.roomAddress = roomAddress;
+		this.roomPrice = roomPrice;
+		this.roomImage = roomImage;
+		this.roomDetail = roomDetail;
+	}
+	
 	public String getRoomTitle() {
 		return roomTitle;
 	}

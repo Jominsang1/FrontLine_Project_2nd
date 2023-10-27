@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.frontline.db.RoomDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,6 +130,10 @@
 	.roomTarget {
 		display: none;
 	}
+	.table_image {
+		height: 100px;
+		width: 100px;
+	}
 </style>
 </head>
 <body>
@@ -167,18 +172,29 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.RoomDBKey.getRoomList().size()/line+(1-(sessionScope.RoomDBKey.getRoomList().size()/line%1))%1}"/>
+				<c:set var="size" value="<%=RoomDB.getRoomList().size()%>"/>
+				<c:set var="page" value="${size/line+(1-(size/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.RoomDBKey.getRoomList()}" varStatus="i">
-					<c:if test="${sessionScope.RoomDBKey.getRoomList().indexOf(item) >= start && sessionScope.RoomDBKey.getRoomList().indexOf(item) <= end}">
+				<c:forEach var="item" items="<%=RoomDB.getRoomList()%>" varStatus="i">
+				<%
+				int target = RoomDB.getRoomList().indexOf(pageContext.getAttribute("item")); 
+				Long start = (Long)pageContext.getAttribute("start");
+				Long end = (Long)pageContext.getAttribute("end");
+				%>
+					<%-- <c:if test="${sessionScope.RoomDBKey.getRoomList().indexOf(item) >= start && sessionScope.RoomDBKey.getRoomList().indexOf(item) <= end}"> --%>
+					<c:if test="<%= target >= start && target <= end %>">
 						<tr>
 							<td>${item.getRoomTitle()}</td>
 							<td>${item.roomAddress}</td>
 							<td>${item.roomPrice}</td>
-							<td><img src="${item.roomImage}"></td>
+							<td><img class="table_image" src="${item.roomImage}"></td>
 							<td>${item.roomDetail}</td>
-							<td><input type="button" value="보기" id="${i.index-start}" name="${i.index}"></td>
+							<td>
+							<c:if test="${item.startDate != null && item.endDate != null }">
+								${item.startDate} ~ ${item.endDate}
+							</c:if>
+							</td>
 							<td class="table_no"><input type="button" value="수정" id="${i.index-start}" name="${i.index}"></td>
 							<td class="table_no"><input type="button" value="삭제" id="${i.index-start}" name="${i.index}"></td>
 						</tr>

@@ -514,6 +514,8 @@ hr {
 .comment_text {
 	width: 100%;
     resize: none;
+    
+    border-radius: 10px;
 }
 .comment_submit {
 	width: 100px;
@@ -528,6 +530,8 @@ hr {
 	align-items: center;
 	
 	margin-bottom: 1%;
+	
+	border-radius: 10px;
 }
 .comment_list_form {
 	display: none;
@@ -537,6 +541,7 @@ hr {
     resize: none;
     
     width: 100%;
+    border-radius: 10px;
 }
 .comment_list_submit {
 	width: 100px;
@@ -553,6 +558,8 @@ hr {
 	
 	margin-left: 8%;
 	margin-bottom: 1%;
+	
+	border-radius: 10px;
 }
 
 
