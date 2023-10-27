@@ -185,21 +185,9 @@
     color: #474747;
 }
 
-.comments_section {
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 17px;
-    display: flex;
-    justify-content: center
-}
-
 .user_number {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 17px;
-}
-
-.comments {
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 20px;
 }
 
 .div7 {
@@ -354,21 +342,9 @@ p1 {
     color: #474747;
 }
 
-.comments_section {
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 17px;
-    display: flex;
-    justify-content: center
-}
-
 .user_number {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 17px;
-}
-
-.comments {
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 20px;
 }
 
 .div7 {
@@ -385,9 +361,6 @@ p1 {
 
 }
 
-.comments {
-    color: #999999;
-}
 
 .bundle {
     display: flex;
@@ -396,17 +369,6 @@ p1 {
 
 .bt {
     margin-right: 30px;
-}
-
-#submit-comment {
-    width: 60px;
-    height: 35px;
-    border-radius: 20px;
-    border: none;
-    background-color: #5498FF;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .reply,
@@ -420,13 +382,6 @@ p1 {
     color: white;
     font-weight: bold;
     cursor: pointer;
-}
-
-
-
-.comments {
-    color: #999999;
-    margin-bottom: 13px;
 }
 
 /*추가*/
@@ -480,18 +435,6 @@ p1 {
     display: flex;
     justify-content: space-between;
 }
-
-.plus_comments {
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 20px;
-    color: #999999;
-    margin-bottom: 13px;
-}
-
-.plus_comments {
-    margin-left: 40px;
-}
-
 #x2 {
     border: none;
     cursor: pointer;
@@ -499,70 +442,80 @@ p1 {
 }
 
 /* 댓글관련 수정 */
-
-hr {
-	margin: 2%;
-}
-.comment_wrap {
-	height: 1000px;
-	padding-left: 5%;
-	padding-right: 5%;
-}
-.comment_form {
-	display: flex;
-}
-.comment_text {
-	width: 100%;
-    resize: none;
-    
-    border-radius: 10px;
-}
-.comment_submit {
-	width: 100px;
-	margin-left: 1%;
-}
-.comment_list {
-	border: 1px solid black;
-	padding: 1%;
+.line {
+	border-top: 1px solid black;
 	
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+.image_user, .image_admin, .image_comment, .image_comment_direction {
+	height: 50px;
+	width: 50px;
+}
+.comments_section {
+	height: auto;
+}
+
+.comment_write, .coComment_write{
 	display: flex;
-	justify-content: space-between;
+	
+	height: 20%;
+}
+
+.comment_write_form, .coComment_write_form {
+	display: flex;
+	justify-content: space-evenly;
 	align-items: center;
 	
-	margin-bottom: 1%;
+	width: 100%;
+	height: 100%;
+}
+
+.comment_write_text, .coComment_write_text {
+	resize: none;
+	width: 80%;
+	height: 50px;
 	
 	border-radius: 10px;
 }
-.comment_list_form {
-	display: none;
-	margin-bottom: 1%;
-}
-.comment_list_text {
-    resize: none;
-    
-    width: 100%;
-    border-radius: 10px;
-}
-.comment_list_submit {
+
+.comment_write_submit, .comment_view_button, .coComment_write_submit{
 	width: 100px;
-	margin-left: 1%;
-}
-.comment_list_target {
-	display: none;
-}
-.coComment_list_wrap {
-	border: 1px solid grey;
-	width: 90%;
-	
-	padding: 1%;
-	
-	margin-left: 8%;
-	margin-bottom: 1%;
+	height: 50px;
 	
 	border-radius: 10px;
+	border: 1px solid grey;
+	
+	cursor: pointer;
 }
 
+.comment_view{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
 
+.comment_view_main, .coComment_view_main{
+	width: 80%;
+}
+
+.coComment_write {
+	display: none;
+}
+
+.coComment_write_target {
+	display: none;
+}
+
+.coComment_view {
+	display: flex;
+	align-items: center;
+	
+	padding-left: 3%;
+}
+.coComment_view div {
+	margin-right: 3%;
+}
 
 
 
