@@ -11,14 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="resources/js/detail_page.js"></script>
-	<link rel="stylesheet" href="resources/css/detail_page.css">
 	<!-- 헤더 자바스크립트 -->
     <script src="resources/js/header.js"></script>
     <!-- 헤더 스타일 -->
     <link rel="stylesheet" href="resources/css/header.css">
     <!-- 푸터 스타일 -->
     <link rel="stylesheet" href="resources/css/footer.css">
+    <%-- 상세페이지 스크립트 --%>
+	<script src="resources/js/detail_page.js"></script>
+	<%-- 상세페이지 css --%>
+	<link rel="stylesheet" href="resources/css/detail_page.css">
     <script>
     <%-- 댓글기능 관련 스크립트 --%>
     $(function(){
@@ -105,13 +107,13 @@
 		<hr>
 		
 		<div class="comment_list_wrap">
-			<c:if test="${sessionScope.commentData != null }">
-				<c:forEach var="item" items="${sessionScope.commentData.commentData}" varStatus="i">
+			<c:if test="${sessionScope.CommentDBKey != null }">
+				<c:forEach var="item" items="${sessionScope.CommentDBKey.commentList}" varStatus="i">
 				<div class="comment_list" id="${i.index}">
 					<div>
-						<div class="comment_list_title">아이디 : ${sessionScope.commentData.commentData.get(i.index).getCommentId()} 등급 : ${sessionScope.commentData.commentData.get(i.index).getCommentGrade()} </div>
-						<div class="comment_list_text">${sessionScope.commentData.commentData.get(i.index).getCommentText()}</div>
-						<div>작성날짜 : ${sessionScope.commentData.commentData.get(i.index).getCommentRegDate()}</div>
+						<div class="comment_list_title">아이디 : ${sessionScope.CommentDBKey.commentList.get(i.index).getCommentId()} 등급 : ${sessionScope.CommentDBKey.commentList.get(i.index).getCommentGrade()} </div>
+						<div class="comment_list_text">${sessionScope.CommentDBKey.commentList.get(i.index).getCommentText()}</div>
+						<div>작성날짜 : ${sessionScope.CommentDBKey.commentList.get(i.index).getCommentRegDate()}</div>
 					</div>
 					<div>
 						<input class="comment_list_button" type="submit" value="답글달기">
@@ -124,8 +126,8 @@
 						<input class="comment_list_submit" type="submit" value="등록">
 					</form>
 				</div>
-					<c:if test="${item.getCommentData().isEmpty() == false}">
-						<c:forEach var="item" items="${item.getCommentData()}" varStatus="i">
+					<c:if test="${item.getCommentList().isEmpty() == false}">
+						<c:forEach var="item" items="${item.getCommentList()}" varStatus="i">
 							<div class="coComment_list_wrap">
 								<div class="coComment_list_title">아이디 : ${item.getCommentId()} 등급 : ${item.getCommentGrade()} </div>
 								<div class="coComment_list_text">${item.getCommentText()}</div>

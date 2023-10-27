@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.javabeans.UserBean;
-import com.frontline.db.UserDb;
+import com.frontline.javabeans.UserDTO;
+import com.frontline.db.UserDB;
 
 /**
  * Servlet implementation class Join
@@ -51,7 +51,7 @@ public class Join extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// UserBean 필드 값에 입력
-		UserBean userBean = new UserBean();
+		UserDTO userBean = new UserDTO();
 		
 		userBean.setUserName(request.getParameter("userName"));
 		userBean.setUserId(request.getParameter("userId"));
@@ -63,16 +63,16 @@ public class Join extends HttpServlet {
 		userBean.setUserGrade("user");
 		
 		
-		UserDb userData = new UserDb();
+		UserDB userData = new UserDB();
 		
-		if(session.getAttribute("userData") == null) {
-			userData.getUserData().add(userBean);
+		if(session.getAttribute("UserDBKey") == null) {
+			userData.getUserList().add(userBean);
 		} else {
-			userData = (UserDb)session.getAttribute("userData");
-			userData.getUserData().add(userBean);
+			userData = (UserDB)session.getAttribute("UserDBKey");
+			userData.getUserList().add(userBean);
 		}
 		
-		session.setAttribute("userData", userData);
+		session.setAttribute("UserDBKey", userData);
 		
 		response.getWriter().println("<script>alert('회원가입이 완료되었습니다.'); location.href='main.jsp';</script>");
 	}

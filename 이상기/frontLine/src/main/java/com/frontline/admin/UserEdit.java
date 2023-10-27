@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.db.UserDb;
-import com.frontline.javabeans.UserBean;
+import com.frontline.db.UserDB;
+import com.frontline.javabeans.UserDTO;
 
 /**
  * Servlet implementation class Edit
@@ -45,8 +45,8 @@ public class UserEdit extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// UserBean 필드 값에 입력
-		UserBean userBean = (UserBean)session.getAttribute("userBean");
-		UserDb userData = (UserDb)session.getAttribute("userData");
+		UserDTO userBean = (UserDTO)session.getAttribute("UserBeanKey");
+		UserDB userData = (UserDB)session.getAttribute("UserDBKey");
 		
 		int target = Integer.parseInt(request.getParameter("userTarget"));
 		
@@ -58,36 +58,36 @@ public class UserEdit extends HttpServlet {
 		    switch(name) {
 		    	case "userName":
 		    		if(request.getParameter(name) != "") {
-		    			System.out.println("수정전 userName : " + userData.getUserData().get(target).getUserName());
-		    			userData.getUserData().get(target).setUserName(request.getParameter(name));
+		    			System.out.println("수정전 userName : " + userData.getUserList().get(target).getUserName());
+		    			userData.getUserList().get(target).setUserName(request.getParameter(name));
 		    			System.out.println("수정된 userName : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userPw":
 		    		if(request.getParameter(name) != "") {
-		    			System.out.println("수정전 userPw : " + userData.getUserData().get(target).getUserPw());
-		    			userData.getUserData().get(target).setUserPw(request.getParameter(name));
+		    			System.out.println("수정전 userPw : " + userData.getUserList().get(target).getUserPw());
+		    			userData.getUserList().get(target).setUserPw(request.getParameter(name));
 		    			System.out.println("수정된 userPw : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userEmail":
 		    		if(request.getParameter(name) != "") {
-		    			System.out.println("수정전 userEmail : " + userData.getUserData().get(target).getUserEmail());
-		    			userData.getUserData().get(target).setUserEmail(request.getParameter(name));
+		    			System.out.println("수정전 userEmail : " + userData.getUserList().get(target).getUserEmail());
+		    			userData.getUserList().get(target).setUserEmail(request.getParameter(name));
 		    			System.out.println("수정된 userEmail : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userPhone":
 		    		if(request.getParameter(name) != "") {
-		    			System.out.println("수정전 userPhone : " + userData.getUserData().get(target).getUserPhone());
-		    			userData.getUserData().get(target).setUserPhone(request.getParameter(name));
+		    			System.out.println("수정전 userPhone : " + userData.getUserList().get(target).getUserPhone());
+		    			userData.getUserList().get(target).setUserPhone(request.getParameter(name));
 		    			System.out.println("수정된 userPhone : " + request.getParameter(name));
 		    		}
 		    		break;
 		    	case "userBirth":
 		    		if(request.getParameter(name) != "") {
-		    			System.out.println("수정전 userBirth : " + userData.getUserData().get(target).getUserBirth());
-		    			userData.getUserData().get(target).setUserBirth(request.getParameter(name));
+		    			System.out.println("수정전 userBirth : " + userData.getUserList().get(target).getUserBirth());
+		    			userData.getUserList().get(target).setUserBirth(request.getParameter(name));
 		    			System.out.println("수정된 userBirth : " + request.getParameter(name));
 		    		}
 		    		break;
@@ -95,15 +95,15 @@ public class UserEdit extends HttpServlet {
 		}
 		System.out.println("----------------------------------------------------");
 		
-		for(int i = 0; i<userData.getUserData().size(); i++) {
-			if(userData.getUserData().get(i).getUserId().equals(userBean.getUserId())) {
-				userData.getUserData().set(i, userBean);
+		for(int i = 0; i<userData.getUserList().size(); i++) {
+			if(userData.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
+				userData.getUserList().set(i, userBean);
 			}
 		}
 		
-		session.setAttribute("userBean", userBean);
+		session.setAttribute("UserBeanKey", userBean);
 		
-		session.setAttribute("userData", userData);
+		session.setAttribute("UserDBKey", userData);
 		
 		response.getWriter().println("<script>alert('정보가 수정되었습니다.'); location.href='admin_user.jsp';</script>");
 	}

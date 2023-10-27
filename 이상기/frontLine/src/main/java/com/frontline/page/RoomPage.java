@@ -1,26 +1,25 @@
-package com.frontline.admin;
+package com.frontline.page;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.frontline.db.RoomDB;
 
 /**
- * Servlet implementation class RoomDelete
+ * Servlet implementation class RoomPage
  */
-@WebServlet("/RoomDelete")
-public class RoomDelete extends HttpServlet {
+@WebServlet("/RoomPage")
+public class RoomPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RoomDelete() {
+    public RoomPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +31,8 @@ public class RoomDelete extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		HttpSession session = request.getSession();
-		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		RoomDB roomDb = (RoomDB)session.getAttribute("RoomDBKey");
-		
-		int target = Integer.parseInt(request.getParameter("roomTarget"));
-		
-		roomDb.getRoomList().remove(target);
-		
-		session.setAttribute("RoomDBKey", roomDb);
-		
-		response.sendRedirect("admin_room_management.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("room_page.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

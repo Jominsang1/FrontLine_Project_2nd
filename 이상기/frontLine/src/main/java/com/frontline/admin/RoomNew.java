@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.db.RoomDb;
+import com.frontline.db.RoomDB;
 import com.frontline.javabeans.RoomDTO;
 
 /**
@@ -38,11 +38,11 @@ public class RoomNew extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		RoomDb roomDb = new RoomDb();
+		RoomDB roomDb = new RoomDB();
 		RoomDTO roomDTO = new RoomDTO();
 		
-		if(session.getAttribute("RoomDb") != null) {
-			roomDb = (RoomDb)session.getAttribute("RoomDb");
+		if(session.getAttribute("RoomDBKey") != null) {
+			roomDb = (RoomDB)session.getAttribute("RoomDBKey");
 		}
 		
 		roomDTO.setRoomTitle(request.getParameter("roomTitle"));
@@ -51,9 +51,9 @@ public class RoomNew extends HttpServlet {
 		roomDTO.setRoomImage(request.getParameter("roomImage"));
 		roomDTO.setRoomDetail(request.getParameter("roomDetail"));
 		
-		roomDb.getRoomData().add(roomDTO);
+		roomDb.getRoomList().add(roomDTO);
 		
-		session.setAttribute("RoomDb", roomDb);
+		session.setAttribute("RoomDBKey", roomDb);
 		
 		response.sendRedirect("admin_room_new.jsp");
 	}

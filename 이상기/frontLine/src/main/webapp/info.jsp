@@ -487,7 +487,7 @@
                         <img style="position:relative; top: 5px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_human.png?raw=true">
                         <div class="tbox tname">이름</div>
-                        <div class="tbox tbox1">${sessionScope.userBean.userName}</div>
+                        <div class="tbox tbox1">${sessionScope.UserBeanKey.userName}</div>
                         <input style="position:relative; top: 6px; left:110px;" class="adjust" id="이름" type="button"
                             value="수정">
                     </div>
@@ -495,7 +495,7 @@
                         <img style="position:relative; top: 5px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_id_before.png?raw=true">
                             <div class="tbox tname">아이디</div>
-                            <div class="tbox">${sessionScope.userBean.userId}</div>
+                            <div class="tbox">${sessionScope.UserBeanKey.userId}</div>
                     </div>
                     <div class="textbox bottom">
                         <img style="position:relative; top: 5px; left:5px;"
@@ -516,7 +516,7 @@
                         <img style="position:relative; top: 6px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_message.png?raw=true">
                         <div class="tbox tname">이메일주소</div>
-                        <div class="tbox tbox2">${sessionScope.userBean.userEmail}</div>
+                        <div class="tbox tbox2">${sessionScope.UserBeanKey.userEmail}</div>
                         <input style="position:relative; top: 6px; left:110px;" class="adjust" type="button"
                             id="이메일주소" value="수정">
                     </div>
@@ -524,7 +524,7 @@
                         <img style="position:relative; top: 6px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_call.png?raw=true">
                         <div class="tbox tname">휴대폰번호</div>
-                        <div class="tbox tbox3 ">${sessionScope.userBean.userPhone}</div>
+                        <div class="tbox tbox3 ">${sessionScope.UserBeanKey.userPhone}</div>
                         <input style="position:relative; top: 6px; left:110px;" class="adjust" type="button" value="수정"
                             id="휴대폰번호">
                     </div>
@@ -532,7 +532,7 @@
                         <img style="position:relative; top: 6px; left:5px;"
                             src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/icon_gift.png?raw=true">
                         <div class="tbox tname">생년월일 8자리</div>
-                        <div class="tbox ">${sessionScope.userBean.userBirth}</div>
+                        <div class="tbox ">${sessionScope.UserBeanKey.userBirth}</div>
                     </div>
                 </div>
             </div>

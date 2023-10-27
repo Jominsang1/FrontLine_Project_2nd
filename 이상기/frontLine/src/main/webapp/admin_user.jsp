@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.frontline.db.UserDb" %>
+<%@ page import="com.frontline.db.UserDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,12 +204,12 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.userData.getUserData().size()/line+(1-(sessionScope.userData.getUserData().size()/line%1))%1}"/>
+				<c:set var="page" value="${sessionScope.UserDBKey.getUserList().size()/line+(1-(sessionScope.UserDBKey.getUserList().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
 				
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.userData.getUserData()}" varStatus="i">
-					<c:if test="${sessionScope.userData.getUserData().indexOf(item) >= start && sessionScope.userData.getUserData().indexOf(item) <= end}">
+				<c:forEach var="item" items="${sessionScope.UserDBKey.getUserList()}" varStatus="i">
+					<c:if test="${sessionScope.UserDBKey.getUserList().indexOf(item) >= start && sessionScope.UserDBKey.getUserList().indexOf(item) <= end}">
 						<tr>
 							<td>${item.userName}</td>
 							<td>${item.userId}</td>

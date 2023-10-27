@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.db.CommentDb;
-import com.frontline.javabeans.CommentBean;
+import com.frontline.db.CommentDB;
+import com.frontline.javabeans.CommentDTO;
 
 /**
  * Servlet implementation class CommentEdit
@@ -40,27 +40,27 @@ public class CommentEdit extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		CommentDb commentData = new CommentDb();
+		CommentDB commentData = new CommentDB();
 		
-		if(session.getAttribute("commentData") != null) {
-			commentData = (CommentDb)session.getAttribute("commentData");
+		if(session.getAttribute("CommentDBKey") != null) {
+			commentData = (CommentDB)session.getAttribute("CommentDBKey");
 		}
 		
 		if(request.getParameter("coCommentTarget").equals("-1")) {
 			int commentTarget = Integer.parseInt(request.getParameter("commentTarget"));
 			
-			commentData.getCommentData().get(commentTarget).setCommentText(request.getParameter("commentText"));
+			commentData.getCommentList().get(commentTarget).setCommentText(request.getParameter("commentText"));
 			
-			session.setAttribute("commentData", commentData);
+			session.setAttribute("CommentDBKey", commentData);
 			
 			response.sendRedirect("admin_comment.jsp");
 		} else {
 			int commentTarget = Integer.parseInt(request.getParameter("commentTarget"));
 			int coCommentTarget = Integer.parseInt(request.getParameter("coCommentTarget"));
 			
-			commentData.getCommentData().get(commentTarget).getCommentData().get(coCommentTarget).setCommentText(request.getParameter("commentText"));
+			commentData.getCommentList().get(commentTarget).getCommentList().get(coCommentTarget).setCommentText(request.getParameter("commentText"));
 			
-			session.setAttribute("commentData", commentData);
+			session.setAttribute("CommentDBKey", commentData);
 			
 			response.sendRedirect("admin_comment.jsp");
 		}

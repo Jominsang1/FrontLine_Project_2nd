@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.db.CommentDb;
-import com.frontline.javabeans.CommentBean;
-import com.frontline.javabeans.UserBean;
+import com.frontline.db.CommentDB;
+import com.frontline.javabeans.CommentDTO;
+import com.frontline.javabeans.UserDTO;
 
 /**
  * Servlet implementation class Comment
@@ -40,15 +40,16 @@ public class Comment extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		if(session.getAttribute("userBean") == null) {
+		
+		if(session.getAttribute("UserBeanKey") == null) {
 			response.getWriter().println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
 		}
-		UserBean userBean = (UserBean)session.getAttribute("userBean");
-		CommentBean commentBean = new CommentBean();
-		CommentDb commentData = new CommentDb();
+		UserDTO userBean = (UserDTO)session.getAttribute("UserBeanKey");
+		CommentDTO commentBean = new CommentDTO();
+		CommentDB commentData = new CommentDB();
 		
-		if(session.getAttribute("commentData") != null) {
-			commentData = (CommentDb)session.getAttribute("commentData");
+		if(session.getAttribute("CommentDBKey") != null) {
+			commentData = (CommentDB)session.getAttribute("CommentDBKey");
 		}
 		
 		commentBean.setCommentId(userBean.getUserId());
@@ -59,15 +60,15 @@ public class Comment extends HttpServlet {
 		if(request.getParameter("commentTarget") != null) {
 			int target = Integer.parseInt(request.getParameter("commentTarget"));
 			
-			commentData.getCommentData().get(target).getCommentData().add(commentBean);
+			commentData.getCommentList().get(target).getCommentList().add(commentBean);
 			
-			session.setAttribute("commentData", commentData);
+			session.setAttribute("CommentDBKey", commentData);
 			
 			response.sendRedirect("ch_food_detail.jsp");
 		} else {
-			commentData.getCommentData().add(commentBean);
+			commentData.getCommentList().add(commentBean);
 			
-			session.setAttribute("commentData", commentData);
+			session.setAttribute("CommentDBKey", commentData);
 			
 			response.sendRedirect("ch_food_detail.jsp");
 		}

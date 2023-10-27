@@ -1,6 +1,6 @@
 package com.frontline.javabeans;
 
-public class UserBean {
+public class UserDTO {
 	private String userName;
 	private String userId;
 	private String userPw;
@@ -10,11 +10,11 @@ public class UserBean {
 	private String userRegDate;
 	private String userGrade;
 	
-	public UserBean() {
+	public UserDTO() {
 		
 	}
 	
-	public UserBean(String userName, String userId, String userPw, String userEmail, String userPhone, String userBirth, String userRegDate, String userGrade) {
+	public UserDTO(String userName, String userId, String userPw, String userEmail, String userPhone, String userBirth, String userRegDate, String userGrade) {
 		this.userName = userName;
 		this.userId = userId;
 		this.userPw = userPw;

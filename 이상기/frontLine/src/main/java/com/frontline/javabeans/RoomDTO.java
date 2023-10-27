@@ -3,13 +3,14 @@ package com.frontline.javabeans;
 import java.time.*;
 
 public class RoomDTO {
-	String roomTitle;
-	String roomAddress;
-	String roomPrice;
-	String roomImage;
-	String roomDetail;
-	LocalDateTime startDate;
-	LocalDateTime endDate;
+	private String roomTitle;
+	private String roomAddress;
+	private String roomPrice;
+	private String roomImage;
+	private String roomDetail;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	
 	public String getRoomTitle() {
 		return roomTitle;
 	}

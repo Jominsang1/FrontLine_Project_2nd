@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.frontline.db.UserDb" %>
+<%@ page import="com.frontline.db.UserDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,11 +211,11 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.commentData.getCommentData().size()/line+(1-(sessionScope.commentData.getCommentData().size()/line%1))%1}"/>
+				<c:set var="page" value="${sessionScope.CommentDBKey.getCommentList().size()/line+(1-(sessionScope.CommentDBKey.getCommentList().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.commentData.getCommentData()}" varStatus="i">
-					<c:if test="${sessionScope.commentData.getCommentData().indexOf(item) >= start && sessionScope.commentData.getCommentData().indexOf(item) <= end}">
+				<c:forEach var="item" items="${sessionScope.CommentDBKey.getCommentList()}" varStatus="i">
+					<c:if test="${sessionScope.CommentDBKey.getCommentList().indexOf(item) >= start && sessionScope.CommentDBKey.getCommentList().indexOf(item) <= end}">
 						<tr>
 							<td>댓글</td>
 							<td>${item.commentId}</td>
@@ -225,8 +225,8 @@
 							<td class="table_no"><input type="button" value="수정" class="co" id="${i.index}"></td>
 							<td class="table_no"><input type="button" value="삭제" class="co" id="${i.index}"></td>
 						</tr>
-						<c:if test="${item.commentData.isEmpty() == false}">
-							<c:forEach var="item" items="${item.getCommentData()}" varStatus="j">
+						<c:if test="${item.commentList.isEmpty() == false}">
+							<c:forEach var="item" items="${item.getCommentList()}" varStatus="j">
 							<tr>
 								<td>답글</td>
 								<td>${item.commentId}</td>

@@ -3,18 +3,18 @@ package com.frontline.javabeans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentBean {
-	private List<CommentBean> commentData = new ArrayList<CommentBean>();
+public class CommentDTO {
+	private List<CommentDTO> commentList = new ArrayList<CommentDTO>();
 	private String commentId;
 	private String commentText;
 	private String commentRegDate;
 	private String commentGrade;
 	
-	public List<CommentBean> getCommentData() {
-		return commentData;
+	public List<CommentDTO> getCommentList() {
+		return commentList;
 	}
-	public void setCommentData(List<CommentBean> commentData) {
-		this.commentData = commentData;
+	public void setCommentList(List<CommentDTO> commentList) {
+		this.commentList = commentList;
 	}
 	public String getCommentId() {
 		return commentId;

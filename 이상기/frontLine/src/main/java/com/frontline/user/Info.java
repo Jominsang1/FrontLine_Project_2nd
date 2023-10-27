@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.db.UserDb;
-import com.frontline.javabeans.UserBean;
+import com.frontline.db.UserDB;
+import com.frontline.javabeans.UserDTO;
 
 /**
  * Servlet implementation class Info
@@ -51,8 +51,8 @@ public class Info extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// UserBean 필드 값에 입력
-		UserBean userBean = (UserBean)session.getAttribute("userBean");
-		UserDb userData = (UserDb)session.getAttribute("userData");
+		UserDTO userBean = (UserDTO)session.getAttribute("UserBeanKey");
+		UserDB userData = (UserDB)session.getAttribute("UserDBKey");
 		
 		Enumeration params = request.getParameterNames();
 		
@@ -78,15 +78,15 @@ public class Info extends HttpServlet {
 		    System.out.println("---------------------------------------------------------");
 		}
 		
-		for(int i = 0; i<userData.getUserData().size(); i++) {
-			if(userData.getUserData().get(i).getUserId().equals(userBean.getUserId())) {
-				userData.getUserData().set(i, userBean);
+		for(int i = 0; i<userData.getUserList().size(); i++) {
+			if(userData.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
+				userData.getUserList().set(i, userBean);
 			}
 		}
 		
-		session.setAttribute("userBean", userBean);
+		session.setAttribute("UserBeanKey", userBean);
 		
-		session.setAttribute("userData", userData);
+		session.setAttribute("UserDBKey", userData);
 		
 		response.getWriter().println("<script>alert('정보가 수정되었습니다.'); location.href='info.jsp';</script>");
 	}

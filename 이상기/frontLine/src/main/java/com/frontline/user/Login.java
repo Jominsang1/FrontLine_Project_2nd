@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frontline.javabeans.UserBean;
-import com.frontline.db.UserDb;
+import com.frontline.javabeans.UserDTO;
+import com.frontline.db.UserDB;
 
 /**
  * Servlet implementation class Login
@@ -42,13 +42,13 @@ public class Login extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		UserDb userData = new UserDb();
+		UserDB userData = new UserDB();
 		
-		if(session.getAttribute("userData") != null) {
-			userData = (UserDb)session.getAttribute("userData");
+		if(session.getAttribute("UserDBKey") != null) {
+			userData = (UserDB)session.getAttribute("UserDBKey");
 		}
 		
-		UserBean userBean = new UserBean();
+		UserDTO userBean = new UserDTO();
 		
 		userBean.setUserId(request.getParameter("userId"));
 		userBean.setUserPw(request.getParameter("userPw"));
@@ -56,21 +56,21 @@ public class Login extends HttpServlet {
 		int target = -1;
 		int count = -1;
 		
-		for(int i = 0; i<userData.getUserData().size(); i++) {
-			if(userData.getUserData().get(i).getUserId().equals(userBean.getUserId())) {
-				if(userData.getUserData().get(i).getUserPw().equals(userBean.getUserPw())){
+		for(int i = 0; i<userData.getUserList().size(); i++) {
+			if(userData.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
+				if(userData.getUserList().get(i).getUserPw().equals(userBean.getUserPw())){
 					count = 1;
 					target = i;
-					userBean = userData.getUserData().get(i);
+					userBean = userData.getUserList().get(i);
 				}
 			}
 		}
 		
 		if(count == 1) {
-			userBean = userData.getUserData().get(target);
+			userBean = userData.getUserList().get(target);
 			
-			session.setAttribute("userBean", userBean);
-			session.setAttribute("userData", userData);
+			session.setAttribute("UserBeanKey", userBean);
+			session.setAttribute("UserDBKey", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 성공");
 			System.out.println("---------------------------------------------------------");
@@ -78,7 +78,7 @@ public class Login extends HttpServlet {
 			
 		} else {
 			
-			session.setAttribute("userData", userData);
+			session.setAttribute("UserDBKey", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 실패");
 			System.out.println("---------------------------------------------------------");

@@ -37,7 +37,7 @@
 			$("#popup_image").text(image)
 			$("#popup_detail").text(detail)
 			
-			$("input[name=userTarget]").val(target)
+			$("input[name=roomTarget]").val(target)
 			
 			$(".popup").css("display", "block")
 		})
@@ -46,7 +46,7 @@
 		$("input[value=삭제]").click(function(){
 			let target = $(this).attr("id")
 			
-			$("input[name=roomTarget]").val($(this).attr("name"))
+			$("input[name=roomTarget]").val(target)
 			
 			$("#popup_form").attr("action", "/frontLine/RoomDelete")
 			$("#popup_submit").click();
@@ -127,7 +127,7 @@
 		padding: 1%;
 	}
 	.roomTarget {
-		//display: none;
+		display: none;
 	}
 </style>
 </head>
@@ -167,11 +167,11 @@
 				
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.RoomDb.getRoomData().size()/line+(1-(sessionScope.RoomDb.getRoomData().size()/line%1))%1}"/>
+				<c:set var="page" value="${sessionScope.RoomDBKey.getRoomList().size()/line+(1-(sessionScope.RoomDBKey.getRoomList().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
 				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.RoomDb.getRoomData()}" varStatus="i">
-					<c:if test="${sessionScope.RoomDb.getRoomData().indexOf(item) >= start && sessionScope.RoomDb.getRoomData().indexOf(item) <= end}">
+				<c:forEach var="item" items="${sessionScope.RoomDBKey.getRoomList()}" varStatus="i">
+					<c:if test="${sessionScope.RoomDBKey.getRoomList().indexOf(item) >= start && sessionScope.RoomDBKey.getRoomList().indexOf(item) <= end}">
 						<tr>
 							<td>${item.getRoomTitle()}</td>
 							<td>${item.roomAddress}</td>
@@ -209,12 +209,12 @@
 				<div class="popup_form_title"><h1>수정페이지</h1></div>
 					<div>숙소명 : <a id="popup_title"></a><br><input type="text" name="roomTitle"></div>
 					<div>주소 : <a id="popup_address"></a><br><input type="text" name="roomAddress"></div>
-					<div>가격 : <a id="popup_price"></a><br><input type="text" name="userPrice"></div>
-					<div>이미지 : <a id="popup_image"></a><br><input type="text" name="userImage"></div>
-					<div>상세설명 : <a id="popup_detail"></a><br><input type="text" name="userDetail"></div>
+					<div>가격 : <a id="popup_price"></a><br><input type="text" name="roomPrice"></div>
+					<div>이미지 : <a id="popup_image"></a><br><input type="text" name="roomImage"></div>
+					<div>상세설명 : <a id="popup_detail"></a><br><input type="text" name="roomDetail"></div>
 					<input class="roomTarget" type="text" name="roomTarget">
 					<div class="popup_form_bottom">
-						<input type="submit" value="수정하기">
+						<input id="popup_submit" type="submit" value="수정하기">
 						<input type="button" value="취소">
 					</div>
 				</form>

@@ -26,7 +26,7 @@
 	<main>
 		<jsp:include page="admin_aside.jsp"/>
 		<section>
-			<h1>${sessionScope.userBean.userName}님 환영합니다.</h1>
+			<h1>${sessionScope.UserBeanKey.userName}님 환영합니다.</h1>
 		</section>
 	</main>
 </body>

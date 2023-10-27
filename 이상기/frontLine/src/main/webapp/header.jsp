@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.frontline.javabeans.UserBean" %>
-<%@ page import="com.frontline.db.UserDb" %>
+<%@ page import="com.frontline.javabeans.UserDTO" %>
+<%@ page import="com.frontline.db.UserDB" %>
 	<header>
 		<div class="header_logo">
 			<a href="main.jsp"><img src="resources/images/logo_main.png"></a>
@@ -23,22 +23,26 @@
 			<ul class="menu_wrap">
 				<li class="button"><img class="header_img" src="resources/images/세줄로고.png"></li>
 					<ul class="menu">
-						<% if(session.getAttribute("userBean") == null){
-							%>
+						<%
+						 if(session.getAttribute("UserBeanKey") == null){
+						%>
 							<li class="menu_login"><a href="login.jsp">로그인</a></li>
 							<li class="menu_join"><a href="join_1.jsp">회원가입</a></li>
 							<%
-						} else {
+
+											} else {
 							%>
-							<li>${sessionScope.userBean.userName}님 환영합니다.</li>
-							<% 
-							if("user".equals(((UserBean)session.getAttribute("userBean")).getUserGrade())){
-								%>
+							<li>${sessionScope.UserBeanKey.userName}님 환영합니다.</li>
+							<%
+							 
+												if("user".equals(((UserDTO)session.getAttribute("UserBeanKey")).getUserGrade())){
+							%>
 								<li class="menu_logout"><a href="/frontLine/Logout">로그아웃</a></li>
 								<li class="menu_my"><a href="info.jsp">내 정보</a></li>
 								<li class="menu_reser"><a href="my-예약내역.html">예약내역</a></li>
-								<%	
-							} else if("admin".equals(((UserBean)session.getAttribute("userBean")).getUserGrade())){
+								<%
+									
+													} else if("admin".equals(((UserDTO)session.getAttribute("UserBeanKey")).getUserGrade())){
 								%>
 								<li class="menu_logout"><a href="/frontLine/Logout">로그아웃</a></li>
 								<li class="menu_my"><a href="info.jsp">내 정보</a></li>
