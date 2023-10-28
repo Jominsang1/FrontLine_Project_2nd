@@ -28,7 +28,8 @@
 	justify-content: space-evenly;
 }
 .room_section {
-	border: 1px solid red;
+	border: 1px solid black;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -38,6 +39,10 @@
 }
 .room_section img {
 	width: 100%;
+	height: 170px;
+	
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 .room_page {
 	display: none;
