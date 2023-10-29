@@ -1,8 +1,8 @@
 window.addEventListener("load", function () {
-    let address = document.querySelector(".room_address").innerText;
+    let address = document.querySelector(".address").innerText;
 
     let address1 = "휴먼교육센터";
-    let title = document.querySelector(".room_title").innerText
+    let title = document.querySelector(".title").innerText
 	
 	// map();
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

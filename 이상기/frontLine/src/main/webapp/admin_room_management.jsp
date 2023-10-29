@@ -146,7 +146,6 @@
         a,
         a:link,
         a visited {
-            color: inherit;
             text-decoration: none;
         }
 

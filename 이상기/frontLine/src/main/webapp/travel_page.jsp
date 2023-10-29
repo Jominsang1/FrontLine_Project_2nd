@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.frontline.db.RoomDB"%>
+<%@ page import="com.frontline.db.TravelDB"%>
 <!DOCTYPE html>
 <html>
 
@@ -54,21 +54,20 @@
 <%
 	int pageNumber = Integer.parseInt(request.getParameter("page"));
 %>
-            <div class="div1 place"><h2 class="title"><%=RoomDB.getRoomList().get(pageNumber).getRoomTitle()%></h2></div>
-			<h4 class="address"><%=RoomDB.getRoomList().get(pageNumber).getRoomAddress() %></h4>
-			<h5><%=RoomDB.getRoomList().get(pageNumber).getRoomTell() %></h5>
+            <div class="div1 place"><h2 class="title"><%=TravelDB.getTravelList().get(pageNumber).getTitle()%></h2></div>
+			<h4 class="address"><%=TravelDB.getTravelList().get(pageNumber).getAddress() %></h4>
             <div class="best_food">
 
                 <div class="food_item">
-					<img src="<%=RoomDB.getRoomList().get(pageNumber).getRoomImage()%>">
+					<img src="<%=TravelDB.getTravelList().get(pageNumber).getImage()%>">
                 </div>
-			
+
             </div><br>
-			<h4>1박 가격 : <%=RoomDB.getRoomList().get(pageNumber).getRoomPrice() %> 원</h4>
+
             <div class="div2">
                 <span class="div2 img"><img
                         src="https://raw.githubusercontent.com/Jominsang1/FrontLine_Project/abd4804f1a43745a0ff936a8ba1c64227c0618d0/images/quotation_marks.png"></span>
-                <span class="div2 title"><%=RoomDB.getRoomList().get(pageNumber).getRoomDetail()%></span>
+                <span class="div2 title"><%=TravelDB.getTravelList().get(pageNumber).getDetail()%></span>
                 <span class="div2 img"><img
                         src="https://raw.githubusercontent.com/Jominsang1/FrontLine_Project/7da459fdc0919fd19c1b2f1517354f19d0c0c86a/images/quotation_marks2.png"></span>
                 <span class="div2 text"></span>

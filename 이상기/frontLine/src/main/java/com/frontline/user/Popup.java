@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.frontline.db.PopupDB;
+
 /**
  * Servlet implementation class Popup
  */
@@ -51,6 +53,15 @@ public class Popup extends HttpServlet {
 		    			c.setMaxAge(10);
 		    			response.addCookie(c);
 		    		};
+		    		break;
+		    	case "popupTarget":
+		    		int target = Integer.parseInt(request.getParameter("popupTarget"));
+		    		
+		    		String image = request.getParameter("popupImage");
+		    		System.out.println(target);
+		    		System.out.println(image);
+		    		
+		    		PopupDB.getPopupList().get(target).setPopupImage(image);
 		    		break;
 		    }
 		}

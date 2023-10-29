@@ -21,18 +21,33 @@
 <script>
 	
 </script>
+<style>
+.popup {
+	heigth: 300px;
+   	width: 300px;
+}
+.popup_new {
+	display: flex;
+}
+.popup_management {
+	display: flex;
+}
+.popup_target {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
 	<main>
 		<jsp:include page="admin_aside.jsp"/>
 		<section>
-			<h1>팝업 관리 페이지입니다.</h1>
+			<h1>팝업 미리보기</h1>
+			
 			<div class="popup_new">
 				<c:forEach var="item" items="<%= PopupDB.getPopupList()%>" varStatus="i">
 					<div class="popup" id="${i.index}">
    	    				<img width="100%" heigth="100%" src="${item.getPopupImage()}">
-   	    				<form class="popup_form" action="/frontLine/Popup">
    	    					<div class="popup_main">
    	    						<div>
    	    							<input id="popup_checkbox" type="checkbox" name="popup"> 10초동안 보지않기
@@ -40,24 +55,17 @@
    	    						<input class="popup_submit" id="popup_submit" type="submit">
    	   	    					<input id="popup_button" type="button" value="닫기">
    	    					</div>
-   	    				</form>
    	    			</div>
 				</c:forEach>
 			</div>
+			<h1>팝업 수정하기</h1>
 			<div class="popup_management">
 				<c:forEach var="item" items="<%= PopupDB.getPopupList()%>" varStatus="i">
-					<div class="popup" id="${i.index}">
-   	    				<img width="100%" heigth="100%" src="${item.getPopupImage()}">
-   	    				<form class="popup_form" action="/frontLine/Popup">
-   	    					<div class="popup_main">
-   	    						<div>
-   	    							<input id="popup_checkbox" type="checkbox" name="popup"> 10초동안 보지않기
-   	    						</div> 
-   	    						<input class="popup_submit" id="popup_submit" type="submit">
-   	   	    					<input id="popup_button" type="button" value="닫기">
-   	    					</div>
-   	    				</form>
-   	    			</div>
+					<form action="/frontLine/Popup">
+						${i.count }번 팝업 이미지 : <input type="text" name="popupImage">
+						<input class="popup_target" type="text" name="popupTarget" value="${i.index}">
+						<input type="submit" value="수정하기">
+					</form>
 				</c:forEach>
 			</div>
 			

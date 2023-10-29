@@ -63,14 +63,15 @@ public class Comment extends HttpServlet {
 			commentData.getCommentList().get(target).getCommentList().add(commentBean);
 			
 			session.setAttribute("CommentDBKey", commentData);
-			
-			response.sendRedirect("ch_food_detail.jsp");
+			String refer = request.getHeader("Referer");
+			response.sendRedirect(refer);
 		} else {
 			commentData.getCommentList().add(commentBean);
 			
 			session.setAttribute("CommentDBKey", commentData);
 			
-			response.sendRedirect("ch_food_detail.jsp");
+			String refer = request.getHeader("Referer");
+			response.sendRedirect(refer);
 		}
 	}
 

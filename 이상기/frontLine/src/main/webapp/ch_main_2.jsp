@@ -86,8 +86,7 @@
                 <div class="weather_wrap"><div id="weather"></div><div>도</div></div>
             </div>
             <div class="title">
-                <p4>천안<br>
-                    베스트 여행지</p4>
+                
             </div>
             <div class="items">
                 <div class="itemss">
@@ -95,11 +94,7 @@
                 </div>
             </div>
             <div style="margin-top : 5px;"></div>
-            <div class="btns">
-                <input type="button" id="btn1">
-                <div id="count"> 1 / 4 </div>
-                <input type="button" id="btn2">
-            </div>
+            
         </div><br>
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.frontline.db.PopupDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -897,7 +898,7 @@
    	   		if(popup1_count == 0){
    	   			%>
    	   			<div class="popup_1" id="popup_1">
-   	    			<img width="100%" heigth="100%" src="resources/images/popup_image_1.jpg">
+   	    			<img width="100%" heigth="100%" src="${PopupDB.getPopupList().get(0).getPopupImage()}">
    	    			<form class="popup_1_form" action="/frontLine/Popup">
    	    				<div class="popup_1_main">
    	    					<div>
@@ -914,7 +915,7 @@
    	   		if(popup2_count == 0){
    	   			%>
    	   			<div class="popup_2" id="popup_2">
-   	   	    		<img width="100%" heigth="100%" src="resources/images/popup_image_2.jpg">
+   	   	    		<img width="100%" heigth="100%" src="${PopupDB.getPopupList().get(1).getPopupImage()}">
    	   	    		<form class="popup_2_form" action="/frontLine/Popup">
    	   	    			<div class="popup_2_main">
    	   	    				<div>
