@@ -9,6 +9,10 @@ public class EatDTO {
 	private String image;
 	private String title;
 	
+	public EatDTO() {
+		
+	}
+	
 	public EatDTO(String city, String address, String tell, String openTime, String detail, String image,
 			String title) {
 		super();

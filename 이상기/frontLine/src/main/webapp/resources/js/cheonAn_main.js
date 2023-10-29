@@ -88,12 +88,6 @@ window.addEventListener("load", function () {
             // console.log(html) // html 출력값 확인
             // console.log(html_travel)
             // document.querySelector('.names').innerHTML = html_name
-            document.querySelector('.itemss').innerHTML = html_travel
-            document.querySelector('.best_food').innerHTML = html_food
-            document.querySelector('.best_play').innerHTML = html_play
-            document.querySelector('#sleep_img').innerHTML = html_sleep
-            document.querySelector('.chungnam_city').innerHTML = html_location
-
 			
           
 

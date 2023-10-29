@@ -43,6 +43,7 @@ public class RoomEdit extends HttpServlet {
 		
 		roomDTO.setRoomTitle(request.getParameter("roomTitle"));
 		roomDTO.setRoomAddress(request.getParameter("roomAddress"));
+		roomDTO.setRoomTell(request.getParameter("roomTell"));
 		roomDTO.setRoomPrice(request.getParameter("roomPrice"));
 		roomDTO.setRoomImage(request.getParameter("roomImage"));
 		roomDTO.setRoomDetail(request.getParameter("roomDetail"));

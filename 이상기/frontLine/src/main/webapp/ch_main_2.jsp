@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.frontline.db.RoomDB" %>
+<%@ page import="com.frontline.db.PlayDB" %>
+<%@ page import="com.frontline.db.TravelDB" %>
+<%@ page import="com.frontline.db.EatDB" %>
 <!DOCTYPE html>
 <html>
 
@@ -113,9 +116,52 @@
 
         </div>
 
-        <div class="best_food">
-           
-        </div><br>
+
+		<div class="room_wrap">
+           <c:forEach var="item" items="<%=EatDB.getEatList()%>" varStatus="i">
+           		<div class="room_section">
+           			<a class="room_view">
+           				<img class="room_image" src="${item.getImage()}"><br>
+           				<span class="room_title">${item.getTitle()}</span>
+           			</a>
+           			<form class="room_page" action="/frontLine/EatPage">
+           				<input type="text" name="page" value="${i.index}">
+           				<input type="submit" value="move">
+           			</form>
+           		</div>
+           </c:forEach>
+        </div><br><br>
+
+
+
+        <div class="second_line">
+            <span>
+                <p4>대충 여행지 고민을 해결해줄</p4>
+            </span><br>
+            <div style="margin-top : 5px;"></div>
+            <span>
+                <p5>대충 유명한 천안의 여행지</p5>
+            </span><a href="./cheonAn_playMore.html" class="item_more">
+                <p5>더보기</p5>
+            </a><br><br>
+        </div>
+
+		<div class="room_wrap">
+           <c:forEach var="item" items="<%=TravelDB.getTravelList()%>" varStatus="i">
+           		<div class="room_section">
+           			<a class="room_view">
+           				<img class="room_image" src="${item.getImage()}"><br>
+           				<span class="room_title">${item.getTitle()}</span>
+           			</a>
+           			<form class="room_page" action="/frontLine/TravelPage">
+           				<input type="text" name="page" value="${i.index}">
+           				<input type="submit" value="move">
+           			</form>
+           		</div>
+           </c:forEach>
+        </div><br><br>
+
+
 
 
         <div class="second_line">
@@ -130,13 +176,38 @@
             </a><br><br>
         </div>
 
-        <div class="best_play">
-           
+
+
+
+       <div class="room_wrap">
+           <c:forEach var="item" items="<%=PlayDB.getPlayList()%>" varStatus="i">
+           		<div class="room_section">
+           			<a class="room_view">
+           				<img class="room_image" src="${item.getImage()}"><br>
+           				<span class="room_title">${item.getTitle()}</span>
+           			</a>
+           			<form class="room_page" action="/frontLine/PlayPage">
+           				<input type="text" name="page" value="${i.index}">
+           				<input type="submit" value="move">
+           			</form>
+           		</div>
+           </c:forEach>
         </div><br><br>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         <div class="second_line">
             <span>
-                <p4>대충 나만의 여행을 위한</p4>
+                <p4>대충 편안하게 휴식하기 좋은</p4>
             </span><br>
             <div style="margin-top : 5px;"></div>
             <span>
@@ -146,11 +217,6 @@
                 <p5>더보기</p5>
             </a><br><br>
         </div>
-		
-		
-		
-		
-		
 		<%-- 숙소 리스트 --%>
         <div class="room_wrap">
            <c:forEach var="item" items="<%=RoomDB.getRoomList()%>" varStatus="i">
@@ -165,7 +231,8 @@
            			</form>
            		</div>
            </c:forEach>
-        </div><br><br>
+        </div>
+        <%--------------------%>
 
 
 
@@ -174,27 +241,6 @@
 
 
 
-        <div class="best_sleep">
-
-            <div id="sleep_img">
-               
-            </div>
-
-
-            <div id="sleep_more">
-                <div id="logoimg"><img
-                        src="https://github.com/Jominsang1/FrontLine_Project/blob/main/images/simbol_white.png?raw=true">
-                </div>
-                <div id="moreinn" style="color: white;">
-                    <p4>멋진 숙소를 만나보세요</p4><br><br><br>
-                    <button type="button" class="sleep_more_btn">
-                        <p6>숙소 더보기</p6>
-                </div>
-            </div>
-        </div><br><br><br>
-        <div style="text-align : center;">
-            <p4>충청남도 관광도시</p4>
-        </div><br><br>
 
         <div class="select_place_list">
             <div class="select_place_img">

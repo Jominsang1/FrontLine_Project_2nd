@@ -1,102 +1,10 @@
 window.addEventListener("load", function () {
-    let address = '';
+    let address = document.querySelector(".room_address").innerText;
 
     let address1 = "휴먼교육센터";
-    let title = '';
-    let titleSub = '';
-    let info = '';
-    let desc = '';
-
-    let html_food = '';
-
-
-    $.ajax({
-        url: "resources/data/ch_data.html",
-        dataType: 'html',
-        success: function (ch) {
-
-            let htmlDom = new DOMParser().parseFromString(ch, 'text/html');
-            let tableDom = htmlDom.documentElement
-
-            let arr_ch_food = tableDom.querySelectorAll(".ch_food")
-            let arr_ch_food_img = tableDom.querySelectorAll(".ch_food .image")
-            let arr_ch_food_title = tableDom.querySelectorAll(".ch_food .title")
-            let arr_ch_food_address = tableDom.querySelectorAll(".ch_food .address")
-            let arr_ch_food_info = tableDom.querySelectorAll(".ch_food .info")
-            let arr_ch_food_desc = tableDom.querySelectorAll(".ch_food .desc")
-            let arr_ch_food_tell = tableDom.querySelectorAll(".ch_food .tell")
-
-            let div_title = document.querySelector('.place')
-            let div_text = document.querySelector('.text')
-            let div_title_sub = document.querySelector('.title')
-            let div_info = document.querySelector('.info')
-            // let div_info1 = document.querySelector('.info1')
-            // let div_tell = document.querySelector('.info')
-
-            let ch_food_img;
-            // console.log(ch_food_img)
-
-
-            // for (let i = 0; i < arr_ch_food_img.length; i++) {
-            //     // if(arr_ch_food[i] == arr_ch_food_img[i]){
-            //     // console.log(arr_ch_food_img[i].innerHTML)
-            //     // }
-            // }
-
-
-
-            console.log(title)
-            for (let i = 0; i < arr_ch_food_img.length; i++) {
-
-                ch_food_img = arr_ch_food_img[i];
-
-                let ch_food_title = arr_ch_food_title[i].innerHTML
-                let ch_food_address = arr_ch_food_address[i].innerHTML
-                let ch_food_info = arr_ch_food_info[i].innerHTML
-                let ch_food_desc = arr_ch_food_desc[i].innerHTML
-                let ch_food_tell = arr_ch_food_tell[i].innerHTML
-
-                if (i == 0) {
-                    title = ch_food_title;
-                    // console.log(title)
-                    address = ch_food_address;
-                    info = ch_food_info;
-                    desc = ch_food_desc;
-                    tell = ch_food_tell;
-                    console.log(address)
-                }
-
-                // console.log(ch_food_img)
-
-                // 만약 title 값이 ch_food_title[배열] 값과 같다면 사진을 출력해라 if 문
-                if (title == ch_food_title) {
-                    titleSub += '천안 맛집으로 소문난<br>'
-                    html_food += `<div class="food">${ch_food_img.innerHTML}</div>`
-
-                }
-                // for (let j = 0; j < ch_food_img.length; j++) {
-                //     let imgs = ch_food_img[j]
-                //     // console.log(imgs)
-                //     html_food += `<div class="food">${imgs.outerHTML}</div>`
-                // }
-
-
-            }
-            // console.log(ch_food_img)
-
-            // document.querySelector(".div1").innerHTML = title
-            document.querySelector('.food_item').innerHTML = html_food
-            div_title.innerHTML = title
-            div_text.innerHTML = desc
-            div_title_sub.innerHTML = titleSub + title
-
-            div_info.innerHTML += `<li4>문의 및 안내 : ${tell}</li4>`
-            div_info.innerHTML += `<li4>편의 정보 : ${info}</li4><br>`
-            div_info.innerHTML += `<li4>주소 : ${address}</li4>`
-            
-            food_slide();
-
-            // map();
+    let title = document.querySelector(".room_title").innerText
+	
+	// map();
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = {
                     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -160,30 +68,7 @@ window.addEventListener("load", function () {
                 find.addEventListener('click', function () {
                     location.href = "https://map.kakao.com/?sName=" + address1 + "&eName=" + address
                 })
-            });
-        }
-
-    });
-
+            })
 
 });
 
-let currentIndex = 1;
-function food_slide() {
-    let slides = document.querySelector('.food_item')
-    let slideimg = document.querySelectorAll('.food').length;
-    // console.log(currentIndex)
-    if (currentIndex >= slideimg) {
-        currentIndex = 0;
-    }
-    setInterval(function () {
-        slides.style.transform = "translateX(-" + currentIndex * "1245" + "px)";
-        slides.style.transition = "transform 0.4s ease-in-out";
-        currentIndex++;
-        //  console.log(currentIndex)
-
-        if (currentIndex === slideimg + 1) {
-            currentIndex = - 1;
-        }
-    }, 1500);
-}

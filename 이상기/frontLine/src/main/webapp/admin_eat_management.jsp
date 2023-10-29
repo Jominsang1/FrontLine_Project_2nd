@@ -21,46 +21,20 @@
   crossorigin="anonymous"></script>
 <style>
 /*셀렉트*/
-.head {
-	display: block;
-}
-
-#search {
-	display: inline-block;
-}
-
-.sb {
-	width: 80px;
-	height: 30px;
-	font-size: 14px;
-	border: 1px solid #aaa;
-	border-radius: 6px;
-}
-
-.sinput {
-	width: 150px;
-	height: 26px;
-	font-size: 14px;
-	text-align: center;
-	border: 1px solid #aaa;
-	border-radius: 6px;
-}
-
-.sbtn {
-	width: 50px;
-	height: 30px;
-	font-size: 14px;
-	border: 1px solid #aaa;
-	border-radius: 6px;
-}
-
 .table {
-	width: 50%;
+	width: 30%;
 }
 
-.table input {
-	width: 100%;
-	word-break: break-all;
+.table textarea {
+	width: 100px;
+}
+.eat_image {
+	width: 100px;
+	height: 100px;
+}
+
+textarea {
+	resize: none;
 }
 </style>
 </head>
@@ -85,13 +59,13 @@
 			</tr>
 			<c:forEach var="item" items="<%= EatDB.getEatList() %>">			
 			<tr>	
-				<td><input class="dto-class" name="city" type="text" value="${item.getCity()}" readonly></td>
-				<td><input class="dto-class" name="address" type="text" value="${item.getAddress()}" readonly></td>
-				<td><input class="dto-class" name="title" type="text" value="${item.getTitle()}" readonly></td>
-				<td><input class="dto-class" name="tell" type="text" value="${item.getTell()}" readonly></td>
-				<td><input class="dto-class" name="openTime" type="text" value="${item.getOpenTime()}" readonly></td>
-				<td><input class="dto-class" name="detail" type="text" value="${item.getDetail()}" readonly></td>
-				<td><input class="dto-class" name="image" type="text" value="${item.getImage()}" readonly></td>
+				<td><textarea class="dto-class" name="city">"${item.getCity()}"</textarea></td>
+				<td><textarea class="dto-class" name="address">"${item.getAddress()}"</textarea></td>
+				<td><textarea class="dto-class" name="title">"${item.getTitle()}"</textarea></td>
+				<td><textarea class="dto-class" name="tell">"${item.getTell()}"</textarea></td>
+				<td><textarea class="dto-class" name="openTime">"${item.getOpenTime()}"</textarea></td>
+				<td><textarea class="dto-class" name="detail">"${item.getDetail()}"</textarea></td>
+				<td><img class="eat_image"src="${item.getImage()}"><textarea class="dto-class" name="image"></textarea></td>
 				<td><input type="button" value="수정"></td>
 				<td><input type="submit" value="완료"></td>
 				<td><input type="button" value="삭제"></td>

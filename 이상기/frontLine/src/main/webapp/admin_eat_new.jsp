@@ -123,7 +123,7 @@ thead th, tbody th {
 		<jsp:include page="admin_aside.jsp"/>
 		
 		<section>
-		<form method="post" action="/frontLine/eat_reg">
+		<form method="post" action="/frontLine/EatNew">
 			<div class="members">
 				<div class="head">
 					<h1 id="hleft">맛집 등록 > 신규등록</h1>
