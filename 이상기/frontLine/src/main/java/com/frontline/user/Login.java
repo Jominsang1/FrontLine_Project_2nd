@@ -42,43 +42,31 @@ public class Login extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		UserDB userData = new UserDB();
-		
-		if(session.getAttribute("UserDBKey") != null) {
-			userData = (UserDB)session.getAttribute("UserDBKey");
-		}
-		
 		UserDTO userBean = new UserDTO();
-		
-		userBean.setUserId(request.getParameter("userId"));
-		userBean.setUserPw(request.getParameter("userPw"));
 		
 		int target = -1;
 		int count = -1;
 		
-		for(int i = 0; i<userData.getUserList().size(); i++) {
-			if(userData.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
-				if(userData.getUserList().get(i).getUserPw().equals(userBean.getUserPw())){
+		for(int i = 0; i<UserDB.getUserList().size(); i++) {
+			if(UserDB.getUserList().get(i).getUserId().equals(request.getParameter("userId"))) {
+				if(UserDB.getUserList().get(i).getUserPw().equals(request.getParameter("userPw"))){
 					count = 1;
 					target = i;
-					userBean = userData.getUserList().get(i);
+					userBean = UserDB.getUserList().get(i);
 				}
 			}
 		}
 		
 		if(count == 1) {
-			userBean = userData.getUserList().get(target);
+			userBean = UserDB.getUserList().get(target);
 			
 			session.setAttribute("UserBeanKey", userBean);
-			session.setAttribute("UserDBKey", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 성공");
 			System.out.println("---------------------------------------------------------");
 			response.getWriter().println("<script>alert('로그인 되었습니다.'); location.href='main.jsp';</script>");
 			
 		} else {
-			
-			session.setAttribute("UserDBKey", userData);
 			
 			System.out.println(request.getParameter("userId") +" " + request.getParameter("userPw")+" 로그인 실패");
 			System.out.println("---------------------------------------------------------");

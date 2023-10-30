@@ -50,12 +50,11 @@ public class Info extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		// UserBean 필드 값에 입력
 		UserDTO userBean = (UserDTO)session.getAttribute("UserBeanKey");
-		UserDB userData = (UserDB)session.getAttribute("UserDBKey");
 		
 		Enumeration params = request.getParameterNames();
 		
+		// 파라미터 네임을 가져와서 일치하면 각각 동작
 		while (params.hasMoreElements()){
 		    String name = (String)params.nextElement();
 		    
@@ -78,15 +77,13 @@ public class Info extends HttpServlet {
 		    System.out.println("---------------------------------------------------------");
 		}
 		
-		for(int i = 0; i<userData.getUserList().size(); i++) {
-			if(userData.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
-				userData.getUserList().set(i, userBean);
+		
+		// 필드수정이 완료된 유저정보를 UserDB 리스트에 담음
+		for(int i = 0; i<UserDB.getUserList().size(); i++) {
+			if(UserDB.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
+				UserDB.getUserList().set(i, userBean);
 			}
 		}
-		
-		session.setAttribute("UserBeanKey", userBean);
-		
-		session.setAttribute("UserDBKey", userData);
 		
 		response.getWriter().println("<script>alert('정보가 수정되었습니다.'); location.href='info.jsp';</script>");
 	}
