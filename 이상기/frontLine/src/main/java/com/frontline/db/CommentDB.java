@@ -6,13 +6,13 @@ import java.util.List;
 import com.frontline.javabeans.CommentDTO;
 
 public class CommentDB {
-	private List<CommentDTO> commentList = new ArrayList<CommentDTO>();
+	private static List<CommentDTO> commentList = new ArrayList<CommentDTO>();
 
-	public List<CommentDTO> getCommentList() {
+	public static List<CommentDTO> getCommentList() {
 		return commentList;
 	}
 
-	public void setCommentList(List<CommentDTO> commentList) {
-		this.commentList = commentList;
+	public static void setCommentList(List<CommentDTO> commentList) {
+		CommentDB.commentList = commentList;
 	}
 }

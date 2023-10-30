@@ -41,35 +41,32 @@ public class Comment extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		// UserBeanKey 를 가지고 있느냐에 따라 로그인 상태 판단
 		if(session.getAttribute("UserBeanKey") == null) {
 			response.getWriter().println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
 		}
+		
 		UserDTO userBean = (UserDTO)session.getAttribute("UserBeanKey");
 		CommentDTO commentBean = new CommentDTO();
-		CommentDB commentData = new CommentDB();
-		
-		if(session.getAttribute("CommentDBKey") != null) {
-			commentData = (CommentDB)session.getAttribute("CommentDBKey");
-		}
 		
 		commentBean.setCommentId(userBean.getUserId());
 		commentBean.setCommentText(request.getParameter("commentText"));
 		commentBean.setCommentRegDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY년 MM월 dd일 HH시 mm분 ss초")));
 		commentBean.setCommentGrade(userBean.getUserGrade());
 		
+		// commentTarget 값으로 댓글 답글 여부 판단
 		if(request.getParameter("commentTarget") != null) {
 			int target = Integer.parseInt(request.getParameter("commentTarget"));
 			
-			commentData.getCommentList().get(target).getCommentList().add(commentBean);
+			CommentDB.getCommentList().get(target).getCommentList().add(commentBean);
 			
-			session.setAttribute("CommentDBKey", commentData);
+//			System.out.println(request.getHeader("Referer"));
 			String refer = request.getHeader("Referer");
 			response.sendRedirect(refer);
 		} else {
-			commentData.getCommentList().add(commentBean);
+			CommentDB.getCommentList().add(commentBean);
 			
-			session.setAttribute("CommentDBKey", commentData);
-			
+//			System.out.println(request.getHeader("Referer"));
 			String refer = request.getHeader("Referer");
 			response.sendRedirect(refer);
 		}

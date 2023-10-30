@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.frontline.db.UserDB" %>
+<%@ page import="com.frontline.db.CommentDB" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,7 +201,7 @@
 				<fmt:parseNumber var="line" value="5"/>
 				<%	
 					int pageNumber = 1;
-					
+				// 원하는 페이지 숫자를 가진 파라미터가 있으면 ~ 그값으로 없으면 초기값인 1로
 				if(request.getParameter("pageNumber") != null){
 					pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 					pageContext.setAttribute("pageNumber", pageNumber);
@@ -209,13 +210,13 @@
 				}
 				%>
 				
+				<%-- pageNumber와 line 값을 기준으로 출력할 인덱스의 값을 제한함 --%>
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
-				<c:set var="page" value="${sessionScope.CommentDBKey.getCommentList().size()/line+(1-(sessionScope.CommentDBKey.getCommentList().size()/line%1))%1}"/>
+				<c:set var="page" value="${CommentDB.getCommentList().size()/line+(1-(CommentDB.getCommentList().size()/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
-				<c:set var="flag" value="false"/>
-				<c:forEach var="item" items="${sessionScope.CommentDBKey.getCommentList()}" varStatus="i">
-					<c:if test="${sessionScope.CommentDBKey.getCommentList().indexOf(item) >= start && sessionScope.CommentDBKey.getCommentList().indexOf(item) <= end}">
+				<c:forEach var="item" items="${CommentDB.getCommentList()}" varStatus="i">
+					<c:if test="${CommentDB.getCommentList().indexOf(item) >= start && CommentDB.getCommentList().indexOf(item) <= end}">
 						<tr>
 							<td>댓글</td>
 							<td>${item.commentId}</td>
@@ -225,7 +226,8 @@
 							<td class="table_no"><input type="button" value="수정" class="co" id="${i.index}"></td>
 							<td class="table_no"><input type="button" value="삭제" class="co" id="${i.index}"></td>
 						</tr>
-						<c:if test="${item.commentList.isEmpty() == false}">
+						<%-- 답글을 담고있는 리스트이 값이 비어있는지 확인 --%>
+						<c:if test="${item.getCommentList().isEmpty() == false}">
 							<c:forEach var="item" items="${item.getCommentList()}" varStatus="j">
 							<tr>
 								<td>답글</td>
@@ -233,6 +235,7 @@
 								<td>${item.commentText}</td>
 								<td>${item.commentRegDate}</td>
 								<td>${item.commentGrade}</td>
+								<%-- i인덱스 값은 댓글의 인덱스 j인덱스의 값은 답글의 인덱스 --%>
 								<td class="table_no"><input type="button" value="수정" class="coco" id="${i.index}" name="${j.index}"></td>
 								<td class="table_no"><input type="button" value="삭제" class="coco" id="${i.index}" name="${j.index}"></td>
 							</tr>
@@ -244,6 +247,7 @@
 				<div class="page">
 				<input id="prev_button" type=button value="<">
 				<c:forEach var="i" begin="1" end="${page}">
+					<%-- i의 값이 pageNumber와 일치하면 굵게 표시해서 현재 페이지 표시해주기 --%>
 					<a class="page_num_button" id="page_num_button" value="${i}" style="
 					<c:if test="${i == pageNumber}">
 					 font-weight:bold;

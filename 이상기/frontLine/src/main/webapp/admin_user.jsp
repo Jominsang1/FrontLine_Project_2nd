@@ -193,7 +193,7 @@
 				<fmt:parseNumber var="line" value="5"/>
 				<%	
 					int pageNumber = 1;
-					
+				// 원하는 페이지 숫자를 가진 파라미터가 있으면 ~ 그값으로 없으면 초기값인 1로
 				if(request.getParameter("pageNumber") != null){
 					pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 					pageContext.setAttribute("pageNumber", pageNumber);
@@ -202,13 +202,12 @@
 				}
 				%>
 				
+				<%-- pageNumber와 line 값을 기준으로 출력할 인덱스의 값을 제한함 --%>
 				<c:set var="start" value="${line*(pageNumber-1)}"/>
 				<c:set var="end" value="${start+line-1}"/>
 				<c:set var="size" value="<%=UserDB.getUserList().size()%>"/>
 				<c:set var="page" value="${size/line+(1-(size/line%1))%1}"/>
 				<fmt:parseNumber var="page" value="${page}"/>
-				
-				<c:set var="flag" value="false"/>
 				<c:forEach var="item" items="<%=UserDB.getUserList()%>" varStatus="i">
 				<%
 				int target = UserDB.getUserList().indexOf(pageContext.getAttribute("item")); 

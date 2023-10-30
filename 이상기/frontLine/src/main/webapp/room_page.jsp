@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.frontline.db.RoomDB"%>
+<%@ page import="com.frontline.db.CommentDB"%>
 <!DOCTYPE html>
 <html>
 
@@ -114,21 +115,21 @@
 		<div class="line"></div>
 		
 		<div class="comments_list">
-			<c:if test="${sessionScope.CommentDBKey != null }">
-				<c:forEach var="item" items="${sessionScope.CommentDBKey.commentList}" varStatus="i">
+			<c:if test="<%=CommentDB.getCommentList().isEmpty() == false%>">
+				<c:forEach var="item" items="${CommentDB.getCommentList()}" varStatus="i">
 				<div class="comment_view" id="${i.index}">
 					<div>
-						<c:if test="${sessionScope.CommentDBKey.commentList.get(i.index).getCommentGrade() == 'user'}">
+						<c:if test="${CommentDB.getCommentList().get(i.index).getCommentGrade() == 'user'}">
 							<img class="image_user" src="resources/images/icon_user.png">
 						</c:if>
-						<c:if test="${sessionScope.CommentDBKey.commentList.get(i.index).getCommentGrade() == 'admin'}">
+						<c:if test="${CommentDB.getCommentList().get(i.index).getCommentGrade() == 'admin'}">
 							<img class="image_user" src="resources/images/icon_admin.png">
 						</c:if>
 					</div>
 					<div class="comment_view_main">
-						<div class="comment_view_title">${sessionScope.CommentDBKey.commentList.get(i.index).getCommentId()}</div>
-						<div class="comment_view_text">${sessionScope.CommentDBKey.commentList.get(i.index).getCommentText()}</div>
-						<div>작성날짜 : ${sessionScope.CommentDBKey.commentList.get(i.index).getCommentRegDate()}</div>
+						<div class="comment_view_title">${CommentDB.getCommentList().get(i.index).getCommentId()}</div>
+						<div class="comment_view_text">${CommentDB.getCommentList().get(i.index).getCommentText()}</div>
+						<div>작성날짜 : ${CommentDB.getCommentList().get(i.index).getCommentRegDate()}</div>
 					</div>
 					<div>
 						<input class="comment_view_button" type="submit" value="답글달기">
