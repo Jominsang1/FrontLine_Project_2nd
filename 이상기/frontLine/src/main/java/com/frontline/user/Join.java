@@ -62,19 +62,21 @@ public class Join extends HttpServlet {
 		userBean.setUserRegDate(LocalDate.now().format(DateTimeFormatter.ofPattern("YYYYMMdd")));
 		userBean.setUserGrade("user");
 		
-		
-		UserDB userData = new UserDB();
-		
-		if(session.getAttribute("UserDBKey") == null) {
-			userData.getUserList().add(userBean);
-		} else {
-			userData = (UserDB)session.getAttribute("UserDBKey");
-			userData.getUserList().add(userBean);
+		int dup = 0;
+
+		for(int i = 0; i<UserDB.getUserList().size(); i++) {
+			if(UserDB.getUserList().get(i).getUserId().equals(userBean.getUserId())) {
+				response.getWriter().println("<script>alert('중복된 아이디가 존재합니다.'); location.href='join_2.jsp';</script>");
+				dup = 1;
+			}
 		}
 		
-		session.setAttribute("UserDBKey", userData);
+		if(dup == 0) {
+			UserDB.getUserList().add(userBean);
+			
+			response.getWriter().println("<script>alert('회원가입이 완료되었습니다.'); location.href='main.jsp';</script>");
+		}
 		
-		response.getWriter().println("<script>alert('회원가입이 완료되었습니다.'); location.href='main.jsp';</script>");
 	}
 
 	/**
